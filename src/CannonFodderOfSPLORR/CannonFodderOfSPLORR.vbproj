@@ -16,6 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.55.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CFOS.UI\CFOS.UI.vbproj" />
   </ItemGroup>
 
