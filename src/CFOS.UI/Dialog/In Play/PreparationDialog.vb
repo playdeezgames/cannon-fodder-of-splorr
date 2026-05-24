@@ -1,7 +1,7 @@
 ﻿Imports CFOS.Model
 Imports TGGD.UI
 
-Friend Class InPlayDialog
+Friend Class PreparationDialog
     Inherits BaseModelDialog
 
     Private Sub New(context As IHostContext, model As IWorldModel)
@@ -9,12 +9,12 @@ Friend Class InPlayDialog
     End Sub
 
     Friend Shared Function Launch(context As IHostContext, worldModel As IWorldModel) As Func(Of IDialog)
-        Return Function() New InPlayDialog(context, worldModel)
+        Return Function() New PreparationDialog(context, worldModel)
     End Function
 
     Public Overrides Function Run() As IDialog
         context.Clear()
-        context.OutputLine("Yer playing the game!")
+        context.OutputLine($"Faction Name: {model.FactionName}")
         Return context.Choose(
             "Now What?",
             New List(Of IDialogChoice) From

@@ -30,4 +30,8 @@ Friend Class CFOSHostContext
         prompt.AddChoices(choices)
         Return AnsiConsole.Prompt(prompt).NextDialog
     End Function
+
+    Public Function ReadString(text As String) As String Implements IHostContext.ReadString
+        Return AnsiConsole.Ask(Of String)(text)
+    End Function
 End Class

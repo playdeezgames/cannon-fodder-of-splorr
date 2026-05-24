@@ -13,6 +13,6 @@ Friend Class EmbarkDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        Return Neutral.GetNextDialog(context, WorldModel.Create()).Invoke()
+        Return Neutral.GetNextDialog(context, WorldModel.Create(context.ReadString("Faction Name:"))).Invoke()
     End Function
 End Class
