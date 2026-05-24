@@ -13,6 +13,7 @@ Friend Class MainMenuDialog
             "Main Menu:",
             New List(Of IDialogChoice) From
             {
+                New DialogChoice("Embark!", EmbarkDialog.Launch(context)),
                 New DialogChoice(
                     "Quit",
                     ConfirmDialog.Launch(
