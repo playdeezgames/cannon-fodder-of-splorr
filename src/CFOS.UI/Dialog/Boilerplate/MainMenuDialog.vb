@@ -11,17 +11,14 @@ Friend Class MainMenuDialog
         context.Clear()
         Return context.Choose(
             "Main Menu:",
-            New List(Of IDialogChoice) From
-            {
-                New DialogChoice("Embark!", EmbarkDialog.Launch(context)),
-                New DialogChoice(
-                    "Quit",
-                    ConfirmDialog.Launch(
-                        context,
-                        "Are you sure you want to quit?",
-                        Function() Nothing,
-                        MainMenuDialog.Launch(context)))
-            })
+            DialogChoice.CreateEnabled("Embark!", EmbarkDialog.Launch(context)),
+            DialogChoice.CreateEnabled(
+                "Quit",
+                ConfirmDialog.Launch(
+                    context,
+                    "Are you sure you want to quit?",
+                    Function() Nothing,
+                    MainMenuDialog.Launch(context))))
     End Function
 
     Friend Shared Function Launch(

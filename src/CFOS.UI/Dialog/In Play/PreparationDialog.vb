@@ -17,9 +17,7 @@ Friend Class PreparationDialog
         context.OutputLine($"Faction Name: {model.FactionName}")
         Return context.Choose(
             "Now What?",
-            New List(Of IDialogChoice) From
-            {
-                New DialogChoice("Game Menu", GameMenuDialog.Launch(context, model))
-            })
+            DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model)),
+            DialogChoice.CreateEnabled("Game Menu", GameMenuDialog.Launch(context, model)))
     End Function
 End Class

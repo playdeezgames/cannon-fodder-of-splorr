@@ -21,17 +21,20 @@ Friend Class CFOSHostContext
         AnsiConsole.Clear()
     End Sub
 
-    Public Function Choose(title As String, choices As IReadOnlyList(Of IDialogChoice)) As IDialog Implements IHostContext.Choose
+    Public Function Choose(title As String, ParamArray choices As IDialogChoice()) As IDialog Implements IHostContext.Choose
         Dim prompt As New SelectionPrompt(Of IDialogChoice) With
             {
                 .Title = $"[olive]{title}[/]",
                 .Converter = Function(x) x.Text
             }
-        prompt.AddChoices(choices)
+        prompt.AddChoices(choices.Where(Function(x) x.Enabled))
         Return AnsiConsole.Prompt(prompt).NextDialog
     End Function
 
-    Public Function ReadString(text As String) As String Implements IHostContext.ReadString
+    Public Function ReadString(text As String, Optional defaultValue As String = Nothing) As String Implements IHostContext.ReadString
+        If defaultValue IsNot Nothing Then
+            Return AnsiConsole.Ask(Of String)(text, defaultValue)
+        End If
         Return AnsiConsole.Ask(Of String)(text)
     End Function
 End Class

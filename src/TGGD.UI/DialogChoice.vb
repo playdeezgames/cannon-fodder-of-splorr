@@ -1,6 +1,7 @@
 ﻿Public Class DialogChoice
     Implements IDialogChoice
-    Sub New(text As String, nextDialogGenerator As Func(Of IDialog))
+    Private Sub New(enabled As Boolean, text As String, nextDialogGenerator As Func(Of IDialog))
+        Me.Enabled = enabled
         Me.Text = text
         Me.nextDialogGenerator = nextDialogGenerator
     End Sub
@@ -13,4 +14,14 @@
             Return nextDialogGenerator.Invoke()
         End Get
     End Property
+
+    Public ReadOnly Property Enabled As Boolean Implements IDialogChoice.Enabled
+
+    Public Shared Function Create(enabled As Boolean, text As String, nextDialogGenerator As Func(Of IDialog)) As IDialogChoice
+        Return New DialogChoice(enabled, text, nextDialogGenerator)
+    End Function
+
+    Public Shared Function CreateEnabled(text As String, nextDialogGenerator As Func(Of IDialog)) As IDialogChoice
+        Return Create(True, text, nextDialogGenerator)
+    End Function
 End Class

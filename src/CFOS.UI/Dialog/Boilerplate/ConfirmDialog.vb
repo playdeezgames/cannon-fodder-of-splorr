@@ -29,10 +29,7 @@ Friend Class ConfirmDialog
     Public Overrides Function Run() As IDialog
         Return context.Choose(
             text,
-            New List(Of IDialogChoice) From
-            {
-                New DialogChoice("No", onCancel),
-                New DialogChoice("Yes", onConfirm)
-            })
+            DialogChoice.CreateEnabled("No", onCancel),
+            DialogChoice.CreateEnabled("Yes", onConfirm))
     End Function
 End Class

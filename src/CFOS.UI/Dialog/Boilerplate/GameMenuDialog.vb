@@ -15,18 +15,15 @@ Friend Class GameMenuDialog
     Public Overrides Function Run() As IDialog
         Return context.Choose(
             "Game Menu:",
-            New List(Of IDialogChoice) From
-            {
-                New DialogChoice(
-                    "Continue",
-                    Neutral.GetNextDialog(context, model)),
-                New DialogChoice(
-                    "Abandon Game",
-                    ConfirmDialog.Launch(
-                        context,
-                        "Are you sure you want to abandon?",
-                        MainMenuDialog.Launch(context),
-                        GameMenuDialog.Launch(context, model)))
-            })
+            DialogChoice.CreateEnabled(
+                "Continue",
+                Neutral.GetNextDialog(context, model)),
+            DialogChoice.CreateEnabled(
+                "Abandon Game",
+                ConfirmDialog.Launch(
+                    context,
+                    "Are you sure you want to abandon?",
+                    MainMenuDialog.Launch(context),
+                    GameMenuDialog.Launch(context, model))))
     End Function
 End Class
