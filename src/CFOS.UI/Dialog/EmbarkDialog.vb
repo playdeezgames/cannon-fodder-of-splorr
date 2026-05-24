@@ -1,4 +1,5 @@
-﻿Imports TGGD.UI
+﻿Imports CFOS.Model
+Imports TGGD.UI
 
 Friend Class EmbarkDialog
     Inherits BaseDialog
@@ -12,6 +13,6 @@ Friend Class EmbarkDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        Throw New NotImplementedException()
+        Return Neutral.GetNextDialog(context, WorldModel.Create()).Invoke()
     End Function
 End Class
