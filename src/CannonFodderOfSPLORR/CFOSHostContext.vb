@@ -24,7 +24,7 @@ Friend Class CFOSHostContext
     Public Function Choose(title As String, choices As IReadOnlyList(Of IDialogChoice)) As IDialog Implements IHostContext.Choose
         Dim prompt As New SelectionPrompt(Of IDialogChoice) With
             {
-                .Title = title,
+                .Title = $"[olive]{title}[/]",
                 .Converter = Function(x) x.Text
             }
         prompt.AddChoices(choices)
