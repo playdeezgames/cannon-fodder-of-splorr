@@ -1,3 +1,3 @@
 ﻿Friend Interface IHost
-    Sub Run()
+    Inherits IDialog
 End Interface

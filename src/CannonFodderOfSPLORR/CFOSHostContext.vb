@@ -16,4 +16,18 @@ Friend Class CFOSHostContext
         prompt.AddChoice("Ok")
         AnsiConsole.Prompt(prompt)
     End Sub
+
+    Public Sub Clear() Implements IHostContext.Clear
+        AnsiConsole.Clear()
+    End Sub
+
+    Public Function Choose(title As String, choices As IReadOnlyList(Of IDialogChoice)) As IDialog Implements IHostContext.Choose
+        Dim prompt As New SelectionPrompt(Of IDialogChoice) With
+            {
+                .Title = title,
+                .Converter = Function(x) x.Text
+            }
+        prompt.AddChoices(choices)
+        Return AnsiConsole.Prompt(prompt).NextDialog
+    End Function
 End Class

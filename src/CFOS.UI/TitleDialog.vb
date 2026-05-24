@@ -1,0 +1,21 @@
+﻿Imports TGGD.UI
+
+Friend Class TitleDialog
+    Inherits BaseDialog
+
+    Private Sub New(context As IHostContext)
+        MyBase.New(context)
+    End Sub
+
+    Public Overrides Function Run() As IDialog
+        context.OutputLine("Welcome to:")
+        context.OutputLine("Cannon Fodder of SPLORR!!")
+        context.OutputLine("A production of TheGrumpyGameDev")
+        context.Pause()
+        Return MainMenuDialog.Launch(context).Invoke()
+    End Function
+
+    Friend Shared Function Launch(context As IHostContext) As Func(Of IDialog)
+        Return Function() New TitleDialog(context)
+    End Function
+End Class

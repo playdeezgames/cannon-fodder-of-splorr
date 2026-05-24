@@ -10,10 +10,11 @@ Public Class CFOSHost
         host.Run()
     End Sub
 
-    Public Overrides Sub Run()
-        context.OutputLine("Welcome to:")
-        context.OutputLine("Cannon Fodder of SPLORR!!")
-        context.OutputLine("A production of TheGrumpyGameDev")
-        context.Pause()
-    End Sub
+    Public Overrides Function Run() As IDialog
+        Dim dialog As IDialog = TitleDialog.Launch(context).Invoke()
+        Do While dialog IsNot Nothing
+            dialog = dialog.Run()
+        Loop
+        Return dialog
+    End Function
 End Class
