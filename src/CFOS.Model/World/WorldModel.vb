@@ -25,6 +25,12 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property AvailableUnitTypes As IEnumerable(Of IUnitTypeModel) Implements IWorldModel.AvailableUnitTypes
+        Get
+            Return UnitTypeModel.All.Values
+        End Get
+    End Property
+
     Public Shared Function CreateAndInitialize(factionName As String) As IWorldModel
         Dim world = CFOS.Business.World.Create(New Data.WorldData)
         world.Initialize(factionName)

@@ -9,7 +9,7 @@ Friend Class SquadModel
         Me.world = world
     End Sub
 
-    Public ReadOnly Property MemberCount As Integer Implements ISquadModel.MemberCount
+    Public ReadOnly Property UnitCount As Integer Implements ISquadModel.UnitCount
         Get
             Return 0
         End Get
@@ -20,6 +20,10 @@ Friend Class SquadModel
             Return CFOS.Model.WorldModel.Create(world)
         End Get
     End Property
+
+    Public Sub AddUnit(unitTypeModel As IUnitTypeModel) Implements ISquadModel.AddUnit
+        Throw New NotImplementedException()
+    End Sub
 
     Friend Shared Function Create(world As IWorld) As ISquadModel
         Return New SquadModel(world)

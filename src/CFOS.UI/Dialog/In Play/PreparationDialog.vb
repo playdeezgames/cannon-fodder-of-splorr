@@ -16,7 +16,7 @@ Friend Class PreparationDialog
         context.Clear()
         context.OutputLine($"Faction Name: {model.FactionName}")
         Dim squad = model.Squad
-        context.OutputLine($"Squad Members: {squad.MemberCount}")
+        context.OutputLine($"Squad Members: {squad.UnitCount}")
         Return context.Choose(
             "Now What?",
             DialogChoice.CreateEnabled("Squad...", SquadMenuDialog.Launch(context, squad)),
