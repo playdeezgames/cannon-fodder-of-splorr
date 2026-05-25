@@ -3,6 +3,6 @@ Imports TGGD.UI
 
 Friend Module Neutral
     Friend Function GetNextDialog(context As IHostContext, model As IWorldModel) As Func(Of IDialog)
-        Return PreparationDialog.Launch(context, model)
+        Return PreparationMenuDialog.Launch(context, model)
     End Function
 End Module

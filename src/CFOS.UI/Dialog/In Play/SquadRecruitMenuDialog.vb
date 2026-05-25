@@ -1,7 +1,7 @@
 ﻿Imports CFOS.Model
 Imports TGGD.UI
 
-Friend Class SquadRecruitDialog
+Friend Class SquadRecruitMenuDialog
     Inherits BaseModelDialog(Of ISquadModel)
 
     Private Sub New(context As IHostContext, model As ISquadModel)
@@ -9,7 +9,7 @@ Friend Class SquadRecruitDialog
     End Sub
 
     Friend Shared Function Launch(context As IHostContext, model As ISquadModel) As Func(Of IDialog)
-        Return Function() New SquadRecruitDialog(context, model)
+        Return Function() New SquadRecruitMenuDialog(context, model)
     End Function
 
     Public Overrides Function Run() As IDialog
@@ -19,9 +19,9 @@ Friend Class SquadRecruitDialog
             AvailableUnitTypes.
             Select(Function(x) DialogChoice.CreateEnabled(
                 x.UnitTypeName,
-                SquadRecruitUnitTypeDialog.Launch(context, model, x)))
+                SquadRecruitUnitTypeMenuDialog.Launch(context, model, x)))
         Return context.Choose("Recruit Whom:",
-            choices.
-            Append(DialogChoice.CreateEnabled("Never Mind", SquadMenuDialog.Launch(context, model))).ToArray)
+            {DialogChoice.CreateEnabled("Never Mind", SquadMenuDialog.Launch(context, model))}.
+            Concat(choices).ToArray)
     End Function
 End Class

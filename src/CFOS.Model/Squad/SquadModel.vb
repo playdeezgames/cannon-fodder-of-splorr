@@ -3,29 +3,29 @@
 Friend Class SquadModel
     Implements ISquadModel
 
-    Private ReadOnly world As IWorld
+    Private ReadOnly faction As IFaction
 
-    Private Sub New(world As IWorld)
-        Me.world = world
+    Private Sub New(faction As IFaction)
+        Me.faction = faction
     End Sub
 
     Public ReadOnly Property UnitCount As Integer Implements ISquadModel.UnitCount
         Get
-            Return 0
+            Return faction.UnitCount
         End Get
     End Property
 
     Public ReadOnly Property WorldModel As IWorldModel Implements ISquadModel.WorldModel
         Get
-            Return CFOS.Model.WorldModel.Create(world)
+            Return CFOS.Model.WorldModel.Create(faction.World)
         End Get
     End Property
 
     Public Sub AddUnit(unitTypeModel As IUnitTypeModel) Implements ISquadModel.AddUnit
-        Throw New NotImplementedException()
+        faction.CreateUnit(unitTypeModel.UnitTypeId)
     End Sub
 
-    Friend Shared Function Create(world As IWorld) As ISquadModel
-        Return New SquadModel(world)
+    Friend Shared Function Create(faction As IFaction) As ISquadModel
+        Return New SquadModel(faction)
     End Function
 End Class

@@ -16,6 +16,6 @@ Friend Class SquadMenuDialog
         Return context.Choose(
             "Squad Menu:",
             DialogChoice.CreateEnabled("Never Mind", Neutral.GetNextDialog(context, model.WorldModel)),
-            DialogChoice.CreateEnabled("Recruit...", SquadRecruitDialog.Launch(context, model)))
+            DialogChoice.CreateEnabled("Recruit...", SquadRecruitMenuDialog.Launch(context, model)))
     End Function
 End Class

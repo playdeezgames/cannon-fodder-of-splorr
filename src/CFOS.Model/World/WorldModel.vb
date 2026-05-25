@@ -21,7 +21,7 @@ Public Class WorldModel
 
     Public ReadOnly Property Squad As ISquadModel Implements IWorldModel.Squad
         Get
-            Return SquadModel.Create(world)
+            Return SquadModel.Create(world.Player)
         End Get
     End Property
 
