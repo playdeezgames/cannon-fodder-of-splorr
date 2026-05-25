@@ -19,6 +19,12 @@ Public Class WorldModel
         End Set
     End Property
 
+    Public ReadOnly Property Squad As ISquadModel Implements IWorldModel.Squad
+        Get
+            Return SquadModel.Create(world)
+        End Get
+    End Property
+
     Public Shared Function Create(factionName As String) As IWorldModel
         Dim world = CFOS.Business.World.Create(New Data.WorldData)
         world.Initialize(factionName)

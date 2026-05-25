@@ -15,8 +15,11 @@ Friend Class PreparationDialog
     Public Overrides Function Run() As IDialog
         context.Clear()
         context.OutputLine($"Faction Name: {model.FactionName}")
+        Dim squad = model.Squad
+        context.OutputLine($"Squad Members: {squad.MemberCount}")
         Return context.Choose(
             "Now What?",
+            DialogChoice.CreateEnabled("Squad...", SquadMenuDialog.Launch(context, model)),
             DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model)),
             DialogChoice.CreateEnabled("Game Menu", GameMenuDialog.Launch(context, model)))
     End Function
