@@ -2,11 +2,11 @@
 Imports TGGD.UI
 
 Friend Class SquadMenuDialog
-    Inherits BaseModelDialog
-    Private Sub New(context As IHostContext, model As IWorldModel)
+    Inherits BaseModelDialog(Of ISquadModel)
+    Private Sub New(context As IHostContext, model As ISquadModel)
         MyBase.New(context, model)
     End Sub
-    Friend Shared Function Launch(context As IHostContext, model As IWorldModel) As Func(Of IDialog)
+    Friend Shared Function Launch(context As IHostContext, model As ISquadModel) As Func(Of IDialog)
         Return Function() New SquadMenuDialog(context, model)
     End Function
 
@@ -15,6 +15,6 @@ Friend Class SquadMenuDialog
 
         Return context.Choose(
             "Squad Menu:",
-            DialogChoice.CreateEnabled("Never Mind", Neutral.GetNextDialog(context, model)))
+            DialogChoice.CreateEnabled("Never Mind", Neutral.GetNextDialog(context, model.WorldModel)))
     End Function
 End Class

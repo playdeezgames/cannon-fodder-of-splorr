@@ -25,9 +25,12 @@ Public Class WorldModel
         End Get
     End Property
 
-    Public Shared Function Create(factionName As String) As IWorldModel
+    Public Shared Function CreateAndInitialize(factionName As String) As IWorldModel
         Dim world = CFOS.Business.World.Create(New Data.WorldData)
         world.Initialize(factionName)
+        Return Create(world)
+    End Function
+    Friend Shared Function Create(world As IWorld) As IWorldModel
         Return New WorldModel(world)
     End Function
 End Class

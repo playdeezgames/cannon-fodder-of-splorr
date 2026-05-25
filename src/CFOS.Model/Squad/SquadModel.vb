@@ -15,6 +15,12 @@ Friend Class SquadModel
         End Get
     End Property
 
+    Public ReadOnly Property WorldModel As IWorldModel Implements ISquadModel.WorldModel
+        Get
+            Return CFOS.Model.WorldModel.Create(world)
+        End Get
+    End Property
+
     Friend Shared Function Create(world As IWorld) As ISquadModel
         Return New SquadModel(world)
     End Function

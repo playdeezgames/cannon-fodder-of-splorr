@@ -2,7 +2,7 @@
 Imports TGGD.UI
 
 Friend Class GameMenuDialog
-    Inherits BaseModelDialog
+    Inherits BaseModelDialog(Of IWorldModel)
 
     Private Sub New(context As IHostContext, model As IWorldModel)
         MyBase.New(context, model)

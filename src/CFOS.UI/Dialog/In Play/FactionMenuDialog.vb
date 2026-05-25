@@ -2,7 +2,7 @@
 Imports TGGD.UI
 
 Friend Class FactionMenuDialog
-    Inherits BaseModelDialog
+    Inherits BaseModelDialog(Of IWorldModel)
 
     Private Sub New(context As IHostContext, model As IWorldModel)
         MyBase.New(context, model)
@@ -17,10 +17,10 @@ Friend Class FactionMenuDialog
         context.OutputLine($"Faction Name: {model.FactionName}")
         Return context.Choose(
             "Menu:",
-            DialogChoice.CreateEnabled("Rename...", AddressOf RenameFaction),
             DialogChoice.CreateEnabled(
                 "Never Mind",
-                Neutral.GetNextDialog(context, model)))
+                Neutral.GetNextDialog(context, model)),
+        DialogChoice.CreateEnabled("Rename...", AddressOf RenameFaction))
     End Function
 
     Private Function RenameFaction() As IDialog

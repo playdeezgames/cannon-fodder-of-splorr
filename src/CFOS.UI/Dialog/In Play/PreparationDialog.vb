@@ -2,7 +2,7 @@
 Imports TGGD.UI
 
 Friend Class PreparationDialog
-    Inherits BaseModelDialog
+    Inherits BaseModelDialog(Of IWorldModel)
 
     Private Sub New(context As IHostContext, model As IWorldModel)
         MyBase.New(context, model)
@@ -19,7 +19,7 @@ Friend Class PreparationDialog
         context.OutputLine($"Squad Members: {squad.MemberCount}")
         Return context.Choose(
             "Now What?",
-            DialogChoice.CreateEnabled("Squad...", SquadMenuDialog.Launch(context, model)),
+            DialogChoice.CreateEnabled("Squad...", SquadMenuDialog.Launch(context, squad)),
             DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model)),
             DialogChoice.CreateEnabled("Game Menu", GameMenuDialog.Launch(context, model)))
     End Function
