@@ -1,7 +1,7 @@
 ﻿Imports CFOS.Model
 Imports TGGD.UI
 
-Friend Class PreparationMenuDialog
+Friend Class StagingMenuDialog
     Inherits BaseModelDialog(Of IWorldModel)
 
     Private Sub New(context As IHostContext, model As IWorldModel)
@@ -9,7 +9,7 @@ Friend Class PreparationMenuDialog
     End Sub
 
     Friend Shared Function Launch(context As IHostContext, worldModel As IWorldModel) As Func(Of IDialog)
-        Return Function() New PreparationMenuDialog(context, worldModel)
+        Return Function() New StagingMenuDialog(context, worldModel)
     End Function
 
     Public Overrides Function Run() As IDialog
