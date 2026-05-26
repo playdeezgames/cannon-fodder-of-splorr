@@ -1,7 +1,5 @@
-﻿Imports TGGD.Business
-
-Public Interface IUnit
-    Inherits IEntity
+﻿Public Interface IUnit
+    Inherits IWorldEntity
     ReadOnly Property UnitId As Integer
     ReadOnly Property UnitType As String
 End Interface

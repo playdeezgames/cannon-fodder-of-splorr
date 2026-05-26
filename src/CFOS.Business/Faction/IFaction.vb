@@ -1,9 +1,7 @@
-﻿Imports TGGD.Business
-
-Public Interface IFaction
-    Inherits IEntity
+﻿Public Interface IFaction
+    Inherits IWorldEntity
     ReadOnly Property FactionId As Guid
-    ReadOnly Property World As IWorld
     Function CreateUnit(unitTypeId As String) As IUnit
     ReadOnly Property UnitCount As Integer
+    Property Cradle As IArea
 End Interface

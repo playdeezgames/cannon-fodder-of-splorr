@@ -1,16 +1,14 @@
 ﻿Imports CFOS.Data
-Imports TGGD.Business
 
 Friend Class Unit
-    Inherits Entity(Of UnitData)
+    Inherits WorldEntity(Of UnitData)
     Implements IUnit
 
-    Private ReadOnly worldData As WorldData
     Private ReadOnly factionId As Guid
     Private ReadOnly unitId As Integer
 
     Private Sub New(worldData As WorldData, factionId As Guid, unitId As Integer)
-        Me.worldData = worldData
+        MyBase.New(worldData)
         Me.factionId = factionId
         Me.unitId = unitId
     End Sub

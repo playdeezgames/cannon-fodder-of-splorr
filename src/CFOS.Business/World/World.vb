@@ -39,4 +39,26 @@ Public Class World
         EntityData.Factions(factionId) = New FactionData
         Return Faction.Create(worldData, factionId)
     End Function
+
+    Public Function CreateArea(columns As Integer, rows As Integer) As IArea Implements IWorld.CreateArea
+        Dim areaId = Guid.NewGuid
+        worldData.Areas(areaId) = New AreaData With
+            {
+                .Columns = columns,
+                .Rows = rows,
+                .LocationIds = Enumerable.Range(0, rows).SelectMany(Function(row) Enumerable.Range(0, columns).Select(Function(column) CreateLocation(areaId, column, row))).ToList
+            }
+        Return Area.Create(worldData, areaId)
+    End Function
+
+    Private Function CreateLocation(areaId As Guid, column As Integer, row As Integer) As Guid
+        Dim locationId = Guid.NewGuid
+        worldData.Locations(locationId) = New LocationData With
+            {
+                .AreaId = areaId,
+                .Column = column,
+                .Row = row
+            }
+        Return locationId
+    End Function
 End Class

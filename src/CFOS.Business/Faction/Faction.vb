@@ -1,11 +1,10 @@
 ﻿Imports CFOS.Data
-Imports TGGD.Business
 
 Friend Class Faction
-    Inherits Entity(Of FactionData)
+    Inherits WorldEntity(Of FactionData)
     Implements IFaction
     Private Sub New(worldData As WorldData, factionId As Guid)
-        Me.worldData = worldData
+        MyBase.New(worldData)
         Me.FactionId = factionId
     End Sub
 
@@ -18,8 +17,6 @@ Friend Class Faction
         EntityData.Units.Add(New UnitData With {.UnitType = unitTypeId})
         Return Unit.Create(worldData, FactionId, unitId)
     End Function
-
-    Private ReadOnly worldData As WorldData
     Public ReadOnly Property FactionId As Guid Implements IFaction.FactionId
 
     Protected Overrides ReadOnly Property EntityData As FactionData
@@ -28,15 +25,24 @@ Friend Class Faction
         End Get
     End Property
 
-    Public ReadOnly Property World As IWorld Implements IFaction.World
-        Get
-            Return CFOS.Business.World.Create(worldData)
-        End Get
-    End Property
-
     Public ReadOnly Property UnitCount As Integer Implements IFaction.UnitCount
         Get
             Return EntityData.Units.Count
         End Get
+    End Property
+
+    Public Property Cradle As IArea Implements IFaction.Cradle
+        Get
+            With EntityData
+                If .CradleAreaId.HasValue Then
+                    Return Area.Create(worldData, .CradleAreaId.Value)
+                Else
+                    Return Nothing
+                End If
+            End With
+        End Get
+        Set(value As IArea)
+            EntityData.CradleAreaId = value?.AreaId
+        End Set
     End Property
 End Class
