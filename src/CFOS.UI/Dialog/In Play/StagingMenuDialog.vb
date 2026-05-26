@@ -14,11 +14,12 @@ Friend Class StagingMenuDialog
 
     Public Overrides Function Run() As IDialog
         context.Clear()
-        context.OutputLine($"Faction Name: {model.FactionName}")
+        context.WriteLine($"Faction Name: {model.FactionName}")
         Dim squad = model.Squad
-        context.OutputLine($"Squad Members: {squad.UnitCount}")
+        context.WriteLine($"Squad Members: {squad.UnitCount}")
         Return context.Choose(
             "Now What?",
+            DialogChoice.CreateEnabled("Cradle...", CradleMenuDialog.Launch(context, model.Cradle)),
             DialogChoice.CreateEnabled("Squad...", SquadMenuDialog.Launch(context, squad)),
             DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model)),
             DialogChoice.CreateEnabled("Game Menu", GameMenuDialog.Launch(context, model)))

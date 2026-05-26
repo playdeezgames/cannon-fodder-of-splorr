@@ -14,7 +14,7 @@ Friend Class FactionMenuDialog
 
     Public Overrides Function Run() As IDialog
         context.Clear()
-        context.OutputLine($"Faction Name: {model.FactionName}")
+        context.WriteLine($"Faction Name: {model.FactionName}")
         Return context.Choose(
             "Menu:",
             DialogChoice.CreateEnabled(

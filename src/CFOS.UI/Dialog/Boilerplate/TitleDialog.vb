@@ -8,9 +8,9 @@ Friend Class TitleDialog
     End Sub
 
     Public Overrides Function Run() As IDialog
-        context.OutputLine("Welcome to:")
-        context.OutputLine("Cannon Fodder of SPLORR!!")
-        context.OutputLine("A production of TheGrumpyGameDev")
+        context.WriteLine("Welcome to:")
+        context.WriteLine("Cannon Fodder of SPLORR!!")
+        context.WriteLine("A production of TheGrumpyGameDev")
         context.Pause()
         Return MainMenuDialog.Launch(context).Invoke()
     End Function

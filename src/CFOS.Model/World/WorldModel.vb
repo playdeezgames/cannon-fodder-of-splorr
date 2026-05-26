@@ -31,6 +31,12 @@ Public Class WorldModel
         End Get
     End Property
 
+    Public ReadOnly Property Cradle As IAreaModel Implements IWorldModel.Cradle
+        Get
+            Return AreaModel.Create(world.Player.Cradle)
+        End Get
+    End Property
+
     Public Shared Function CreateAndInitialize(factionName As String) As IWorldModel
         Dim world = CFOS.Business.World.Create(New Data.WorldData)
         world.Initialize(factionName)

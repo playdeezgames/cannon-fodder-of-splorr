@@ -4,7 +4,7 @@ Imports TGGD.UI
 Friend Class CFOSHostContext
     Implements IHostContext
 
-    Public Sub OutputLine(text As String) Implements IHostContext.OutputLine
+    Public Sub WriteLine(text As String) Implements IHostContext.WriteLine
         AnsiConsole.MarkupLine(text)
     End Sub
 
@@ -19,6 +19,10 @@ Friend Class CFOSHostContext
 
     Public Sub Clear() Implements IHostContext.Clear
         AnsiConsole.Clear()
+    End Sub
+
+    Public Sub WriteString(text As String) Implements IHostContext.WriteString
+        AnsiConsole.Markup(text)
     End Sub
 
     Public Function Choose(title As String, ParamArray choices As IDialogChoice()) As IDialog Implements IHostContext.Choose
@@ -36,5 +40,9 @@ Friend Class CFOSHostContext
             Return AnsiConsole.Ask(Of String)(text, defaultValue)
         End If
         Return AnsiConsole.Ask(Of String)(text)
+    End Function
+
+    Public Function ReadKey() As String Implements IHostContext.ReadKey
+        Return Console.ReadKey(True).Key.ToString
     End Function
 End Class

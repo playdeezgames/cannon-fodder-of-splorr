@@ -1,6 +1,8 @@
 ﻿Imports CFOS.Business
+Imports TGGD.Model
 
 Friend Class SquadModel
+    Inherits BaseModel
     Implements ISquadModel
 
     Private ReadOnly faction As IFaction
