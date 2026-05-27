@@ -15,6 +15,10 @@ Friend Class CradleLocationMenuDialog
         context.WriteLine($"Location: ({model.Column}, {model.Row})")
         context.WriteLine($"Location Type: {model.LocationTypeName}")
         context.WriteLine($"Description: {model.LocationTypeDescription}")
+        Dim feature = model.FeatureModel
+        If feature IsNot Nothing Then
+            context.WriteLine($"Feature Type: {feature.FeatureTypeName}")
+        End If
         Return context.Choose("Now What?", DialogChoice.Create(True, "Never Mind", Function() previousDialog))
     End Function
 

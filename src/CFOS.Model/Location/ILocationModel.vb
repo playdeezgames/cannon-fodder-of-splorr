@@ -7,4 +7,5 @@ Public Interface ILocationModel
     ReadOnly Property Row As Integer
     ReadOnly Property LocationTypeName As String
     ReadOnly Property LocationTypeDescription As String
+    ReadOnly Property FeatureModel As IFeatureModel
 End Interface

@@ -23,6 +23,10 @@ Friend Class LocationModel
 
     Public ReadOnly Property Text As String Implements ILocationModel.Text
         Get
+            Dim feature = Me.FeatureModel
+            If feature IsNot Nothing Then
+                Return feature.Text
+            End If
             Return textTable(location.GetLocationType())
         End Get
     End Property
@@ -68,6 +72,15 @@ Friend Class LocationModel
     Public ReadOnly Property LocationTypeDescription As String Implements ILocationModel.LocationTypeDescription
         Get
             Return descriptionTable(location.GetLocationType())
+        End Get
+    End Property
+
+    Public ReadOnly Property FeatureModel As IFeatureModel Implements ILocationModel.FeatureModel
+        Get
+            If location.HasFeature Then
+                Return CFOS.Model.FeatureModel.Create(location.Feature)
+            End If
+            Return Nothing
         End Get
     End Property
 
