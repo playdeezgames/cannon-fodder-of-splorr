@@ -4,13 +4,9 @@ Friend Class Unit
     Inherits WorldEntity(Of UnitData)
     Implements IUnit
 
-    Private ReadOnly factionId As Guid
-    Private ReadOnly unitId As Integer
-
-    Private Sub New(worldData As WorldData, factionId As Guid, unitId As Integer)
+    Private Sub New(worldData As WorldData, unitId As Guid)
         MyBase.New(worldData)
-        Me.factionId = factionId
-        Me.unitId = unitId
+        Me.UnitId = unitId
     End Sub
 
     Public ReadOnly Property UnitType As String Implements IUnit.UnitType
@@ -19,19 +15,15 @@ Friend Class Unit
         End Get
     End Property
 
+    Public ReadOnly Property UnitId As Guid Implements IUnit.UnitId
+
     Protected Overrides ReadOnly Property EntityData As UnitData
         Get
-            Return worldData.Factions(factionId).Units(unitId)
+            Return worldData.Units(UnitId)
         End Get
     End Property
 
-    Private ReadOnly Property IUnit_UnitId As Integer Implements IUnit.UnitId
-        Get
-            Throw New NotImplementedException()
-        End Get
-    End Property
-
-    Friend Shared Function Create(worldData As WorldData, factionId As Guid, unitId As Integer) As IUnit
-        Return New Unit(worldData, factionId, unitId)
+    Friend Shared Function Create(worldData As WorldData, unitId As Guid) As IUnit
+        Return New Unit(worldData, unitId)
     End Function
 End Class

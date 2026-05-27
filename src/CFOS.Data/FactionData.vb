@@ -2,6 +2,6 @@
 
 Public Class FactionData
     Inherits EntityData
-    Property Units As New List(Of UnitData)
-    Property CradleAreaId As Guid?
+    Public Property CradleAreaId As Guid?
+    Public Property UnitIds As New HashSet(Of Guid)
 End Class

@@ -12,10 +12,15 @@ Friend Class Faction
         Return New Faction(worldData, factionId)
     End Function
 
-    Public Function CreateUnit(unitTypeId As String) As IUnit Implements IFaction.CreateUnit
-        Dim unitId = EntityData.Units.Count
-        EntityData.Units.Add(New UnitData With {.UnitType = unitTypeId})
-        Return Unit.Create(worldData, FactionId, unitId)
+    Public Function CreateUnit(unitTypeId As String, location As ILocation) As IUnit Implements IFaction.CreateUnit
+        Dim unitId = Guid.NewGuid
+        worldData.Units(unitId) = New UnitData With
+            {
+                .UnitType = unitTypeId,
+                .LocationId = location.LocationId,
+                .FactionId = FactionId}
+        EntityData.UnitIds.Add(unitId)
+        Return Unit.Create(worldData, unitId)
     End Function
     Public ReadOnly Property FactionId As Guid Implements IFaction.FactionId
 
@@ -27,7 +32,7 @@ Friend Class Faction
 
     Public ReadOnly Property UnitCount As Integer Implements IFaction.UnitCount
         Get
-            Return EntityData.Units.Count
+            Return EntityData.UnitIds.Count
         End Get
     End Property
 

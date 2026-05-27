@@ -7,4 +7,5 @@ Public Class WorldData
     Public Property Areas As New Dictionary(Of Guid, AreaData)
     Public Property Features As New Dictionary(Of Guid, FeatureData)
     Public Property Locations As New Dictionary(Of Guid, LocationData)
+    Public Property Units As New Dictionary(Of Guid, UnitData)
 End Class
