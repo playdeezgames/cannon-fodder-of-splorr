@@ -5,4 +5,6 @@
     Function CreateFeature() As IFeature
     ReadOnly Property HasFeature As Boolean
     ReadOnly Property Feature As IFeature
+    ReadOnly Property Column As Integer
+    ReadOnly Property Row As Integer
 End Interface

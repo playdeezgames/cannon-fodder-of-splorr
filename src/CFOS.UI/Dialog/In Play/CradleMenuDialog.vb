@@ -28,7 +28,8 @@ Friend Class CradleMenuDialog
                 Else
                     context.WriteString(" ")
                 End If
-                context.WriteString("X")
+                Dim location = model.GetLocationModel(column, row)
+                context.WriteString(location.Text)
             Next
             If x = model.Columns - 1 AndAlso y = row Then
                 context.WriteLine("]]")
@@ -36,7 +37,8 @@ Friend Class CradleMenuDialog
                 context.WriteLine(" ")
             End If
         Next
-        context.WriteLine("Escape: exit")
+        context.WriteLine($"Location ({x}, {y})")
+        context.WriteLine("Arrows: move | Space/Enter: ENHANCE! | Escape: exit")
         Dim key = context.ReadKey()
         Select Case key
             Case Keys.Escape
@@ -53,6 +55,8 @@ Friend Class CradleMenuDialog
             Case Keys.DownArrow
                 y = Math.Min(model.Rows - 1, y + 1)
                 Return Me
+            Case Keys.Spacebar, Keys.Enter
+                Return CradleLocationMenuDialog.Launch(context, model.GetLocationModel(x, y), Me).Invoke()
             Case Else
                 Return Me
         End Select

@@ -16,10 +16,10 @@ Friend Module WorldExtensions
     Private ReadOnly locationTypeLegend As IReadOnlyDictionary(Of Char, String) =
         New Dictionary(Of Char, String) From
         {
-            {"#"c, LocationTypes.WALL},
+            {"#"c, LocationTypes.BULKHEAD},
             {"+"c, LocationTypes.HATCH},
-            {"@"c, LocationTypes.FLOOR},
-            {"."c, LocationTypes.FLOOR}
+            {"@"c, LocationTypes.DECK},
+            {"."c, LocationTypes.DECK}
         }
 #Enable Warning CA1859 ' Use concrete types when possible for improved performance
 #Disable Warning CA1859 ' Use concrete types when possible for improved performance

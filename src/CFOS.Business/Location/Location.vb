@@ -35,6 +35,18 @@ Friend Class Location
 
     Public ReadOnly Property LocationId As Guid Implements ILocation.LocationId
 
+    Public ReadOnly Property Column As Integer Implements ILocation.Column
+        Get
+            Return EntityData.Column
+        End Get
+    End Property
+
+    Public ReadOnly Property Row As Integer Implements ILocation.Row
+        Get
+            Return EntityData.Row
+        End Get
+    End Property
+
     Friend Shared Function Create(worldData As WorldData, locationId As Guid) As ILocation
         Return New Location(worldData, locationId)
     End Function

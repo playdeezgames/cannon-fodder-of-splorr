@@ -32,4 +32,12 @@ Friend Class AreaModel
     Friend Shared Function Create(area As IArea) As IAreaModel
         Return New AreaModel(area)
     End Function
+
+    Public Function GetLocationModel(column As Integer, row As Integer) As ILocationModel Implements IAreaModel.GetLocationModel
+        Dim location = area.GetLocation(column, row)
+        If location IsNot Nothing Then
+            Return LocationModel.Create(location)
+        End If
+        Return Nothing
+    End Function
 End Class
