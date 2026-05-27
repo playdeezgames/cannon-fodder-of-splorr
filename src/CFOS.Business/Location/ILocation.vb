@@ -7,4 +7,5 @@
     ReadOnly Property Feature As IFeature
     ReadOnly Property Column As Integer
     ReadOnly Property Row As Integer
+    ReadOnly Property HasUnit As Boolean
 End Interface

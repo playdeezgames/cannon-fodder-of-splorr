@@ -28,6 +28,12 @@ Friend Class Area
         End Get
     End Property
 
+    Public ReadOnly Property Locations As IEnumerable(Of ILocation) Implements IArea.Locations
+        Get
+            Return EntityData.LocationIds.Select(Function(x) CFOS.Business.Location.Create(worldData, x))
+        End Get
+    End Property
+
     Public Function GetLocation(column As Integer, row As Integer) As ILocation Implements IArea.GetLocation
         If column >= 0 AndAlso row >= 0 AndAlso column < Columns AndAlso row < Rows Then
             Return Location.Create(worldData, EntityData.LocationIds(column + row * Columns))

@@ -23,6 +23,12 @@ Friend Class SquadModel
         End Get
     End Property
 
+    Public ReadOnly Property CanRecruit As Boolean Implements ISquadModel.CanRecruit
+        Get
+            Return faction.Cradle.Locations.Any(Function(l) Not l.HasUnit AndAlso If(l.Feature?.CanHouseUnit(), False))
+        End Get
+    End Property
+
     Public Sub AddUnit(unitTypeModel As IUnitTypeModel) Implements ISquadModel.AddUnit
         faction.CreateUnit(unitTypeModel.UnitTypeId)
     End Sub

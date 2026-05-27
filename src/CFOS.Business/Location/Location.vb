@@ -29,7 +29,10 @@ Friend Class Location
 
     Public ReadOnly Property Feature As IFeature Implements ILocation.Feature
         Get
-            Return CFOS.Business.Feature.Create(worldData, EntityData.FeatureId.Value)
+            Return If(
+                EntityData.FeatureId.HasValue,
+                CFOS.Business.Feature.Create(worldData, EntityData.FeatureId.Value),
+                Nothing)
         End Get
     End Property
 
@@ -44,6 +47,12 @@ Friend Class Location
     Public ReadOnly Property Row As Integer Implements ILocation.Row
         Get
             Return EntityData.Row
+        End Get
+    End Property
+
+    Public ReadOnly Property HasUnit As Boolean Implements ILocation.HasUnit
+        Get
+            Return EntityData.UnitId.HasValue
         End Get
     End Property
 
