@@ -37,6 +37,7 @@ Friend Class SquadModel
 
     Public Sub AddUnit(unitTypeModel As IUnitTypeModel) Implements ISquadModel.AddUnit
         Dim unit = faction.CreateUnit(faction.Cradle.Locations.First(Function(l) l.HasAvailableCryoPod()))
+        unit.SetSerialNumber(faction.IncrementNextSerialNumber())
         unit.SetUnitType(unitTypeModel.UnitTypeId)
     End Sub
 

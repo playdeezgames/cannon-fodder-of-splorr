@@ -23,6 +23,12 @@ Friend Class UnitModel
         End Get
     End Property
 
+    Public ReadOnly Property SerialNumber As Integer Implements IUnitModel.SerialNumber
+        Get
+            Return unit.GetSerialNumber()
+        End Get
+    End Property
+
     Friend Shared Function Create(unit As IUnit) As IUnitModel
         Return New UnitModel(unit)
     End Function

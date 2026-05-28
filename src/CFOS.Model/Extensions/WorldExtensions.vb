@@ -33,6 +33,7 @@ Friend Module WorldExtensions
     Friend Sub Initialize(world As IWorld, factionName As String)
         world.Clear()
         Dim faction = world.CreateFaction()
+        faction.SetNextSerialNumber(1)
         Dim cradle = world.CreateArea(initialCradleMap(0).Length, initialCradleMap.Length)
         cradle.SetAreaType(AreaTypes.CRADLE)
         For Each row In Enumerable.Range(0, initialCradleMap.Length)

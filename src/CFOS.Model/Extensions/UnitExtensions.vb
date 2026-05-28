@@ -10,4 +10,12 @@ Friend Module UnitExtensions
     Friend Sub SetUnitType(unit As IUnit, unitType As String)
         unit.SetMetadata(Metadatas.UNIT_TYPE, unitType)
     End Sub
+    <Extension>
+    Friend Sub SetSerialNumber(unit As IUnit, serialNumber As Integer)
+        unit.SetStatistic(Statistics.SERIAL_NUMBER, serialNumber)
+    End Sub
+    <Extension>
+    Friend Function GetSerialNumber(unit As IUnit) As Integer
+        Return unit.GetStatistic(Statistics.SERIAL_NUMBER)
+    End Function
 End Module
