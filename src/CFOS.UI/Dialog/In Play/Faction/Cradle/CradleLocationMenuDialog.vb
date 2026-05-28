@@ -13,8 +13,8 @@ Friend Class CradleLocationMenuDialog
 
     Public Overrides Function Run() As IDialog
         context.WriteLine($"Location: ({model.Column}, {model.Row})")
-        context.WriteLine($"Location Type: {model.LocationTypeName}")
-        context.WriteLine($"Description: {model.LocationTypeDescription}")
+        context.WriteLine($"Location Type: {model.LocationTypeModel.LocationTypeName}")
+        context.WriteLine($"Description: {model.LocationTypeModel.LocationTypeDescription}")
         Dim feature = model.FeatureModel
         If feature IsNot Nothing Then
             context.WriteLine($"Feature Type: {feature.FeatureTypeModel.Name}")

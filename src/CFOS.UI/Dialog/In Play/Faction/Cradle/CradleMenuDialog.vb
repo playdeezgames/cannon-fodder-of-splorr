@@ -29,7 +29,7 @@ Friend Class CradleMenuDialog
                     context.WriteString(" ")
                 End If
                 Dim location = model.GetLocationModel(column, row)
-                context.WriteString(location.Text)
+                context.WriteString(location.GetText())
             Next
             If x = model.Columns - 1 AndAlso y = row Then
                 context.WriteLine("]]")
