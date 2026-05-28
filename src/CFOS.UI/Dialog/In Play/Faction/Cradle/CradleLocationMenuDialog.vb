@@ -17,7 +17,7 @@ Friend Class CradleLocationMenuDialog
         context.WriteLine($"Description: {model.LocationTypeDescription}")
         Dim feature = model.FeatureModel
         If feature IsNot Nothing Then
-            context.WriteLine($"Feature Type: {feature.FeatureTypeName}")
+            context.WriteLine($"Feature Type: {feature.FeatureTypeModel.Name}")
         End If
         Dim unit = model.UnitModel
         If unit IsNot Nothing Then

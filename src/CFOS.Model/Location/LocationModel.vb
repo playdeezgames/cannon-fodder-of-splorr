@@ -29,7 +29,7 @@ Friend Class LocationModel
             End If
             Dim feature = Me.FeatureModel
             If feature IsNot Nothing Then
-                Return feature.Text
+                Return feature.FeatureTypeModel.Text
             End If
             Return textTable(location.GetLocationType())
         End Get
