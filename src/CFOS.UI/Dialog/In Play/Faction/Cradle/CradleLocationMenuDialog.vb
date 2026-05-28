@@ -23,7 +23,11 @@ Friend Class CradleLocationMenuDialog
         If unit IsNot Nothing Then
             context.WriteLine($"Unit Type: {unit.UnitTypeModel.UnitTypeName}")
         End If
-        Return context.Choose("Now What?", DialogChoice.Create(True, "Never Mind", Function() previousDialog))
+        Dim choices =
+            {
+                DialogChoice.Create(True, "Never Mind", Function() previousDialog)
+            }.Concat(feature.GetInterations())
+        Return context.Choose("Now What?", choices.ToArray)
     End Function
 
     Friend Shared Function Launch(context As IHostContext, model As ILocationModel, previousDialog As IDialog) As Func(Of IDialog)
