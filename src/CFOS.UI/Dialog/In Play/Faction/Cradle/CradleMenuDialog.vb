@@ -23,6 +23,7 @@ Friend Class CradleMenuDialog
 
     Public Overrides Function Run() As IDialog
         context.Clear()
+        Dim location As ILocationModel
         For Each row In Enumerable.Range(0, model.Rows)
             For Each column In Enumerable.Range(0, model.Columns)
                 If x = column AndAlso y = row Then
@@ -32,7 +33,7 @@ Friend Class CradleMenuDialog
                 Else
                     context.WriteString(" ")
                 End If
-                Dim location = model.GetLocationModel(column, row)
+                location = model.GetLocationModel(column, row)
                 context.WriteString(location.GetText())
             Next
             If x = model.Columns - 1 AndAlso y = row Then
@@ -41,7 +42,18 @@ Friend Class CradleMenuDialog
                 context.WriteLine(" ")
             End If
         Next
-        context.WriteLine($"Location ({x}, {y})")
+        context.WriteString($"Location ({x}, {y}): ")
+        location = model.GetLocationModel(x, y)
+        context.WriteString(location.LocationTypeModel.LocationTypeName)
+        Dim feature = location.FeatureModel
+        If feature IsNot Nothing Then
+            context.WriteString($", {feature.FeatureTypeModel.Name}")
+        End If
+        Dim unit = location.UnitModel
+        If unit IsNot Nothing Then
+            context.WriteLine($", {unit.GetName()}")
+        End If
+        context.WriteLine("")
         context.WriteLine($"Arrows: move | Space/Enter: ENHANCE! | Escape: {exitText}")
         Dim key = context.ReadKey()
         Select Case key
