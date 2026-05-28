@@ -51,4 +51,10 @@ Friend Class Faction
             EntityData.CradleAreaId = value?.AreaId
         End Set
     End Property
+
+    Public ReadOnly Property Units As IEnumerable(Of IUnit) Implements IFaction.Units
+        Get
+            Return EntityData.UnitIds.Select(Function(x) CFOS.Business.Unit.Create(worldData, x))
+        End Get
+    End Property
 End Class

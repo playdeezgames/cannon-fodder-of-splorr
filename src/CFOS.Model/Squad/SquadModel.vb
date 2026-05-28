@@ -29,6 +29,12 @@ Friend Class SquadModel
         End Get
     End Property
 
+    Public ReadOnly Property UnitModels As IEnumerable(Of IUnitModel) Implements ISquadModel.UnitModels
+        Get
+            Return faction.Units.Select(Function(x) UnitModel.Create(x))
+        End Get
+    End Property
+
     Public Sub AddUnit(unitTypeModel As IUnitTypeModel) Implements ISquadModel.AddUnit
         Dim unit = faction.CreateUnit(faction.Cradle.Locations.First(Function(l) l.HasAvailableCryoPod()))
         unit.SetUnitType(unitTypeModel.UnitTypeId)

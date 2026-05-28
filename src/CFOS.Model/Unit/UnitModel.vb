@@ -17,6 +17,12 @@ Friend Class UnitModel
         End Get
     End Property
 
+    Public ReadOnly Property SquadModel As ISquadModel Implements IUnitModel.SquadModel
+        Get
+            Return CFOS.Model.SquadModel.Create(unit.Faction)
+        End Get
+    End Property
+
     Friend Shared Function Create(unit As IUnit) As IUnitModel
         Return New UnitModel(unit)
     End Function

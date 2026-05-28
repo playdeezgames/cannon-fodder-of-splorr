@@ -11,6 +11,12 @@ Friend Class Unit
 
     Public ReadOnly Property UnitId As Guid Implements IUnit.UnitId
 
+    Public ReadOnly Property Faction As IFaction Implements IUnit.Faction
+        Get
+            Return CFOS.Business.Faction.Create(worldData, EntityData.FactionId)
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As UnitData
         Get
             Return worldData.Units(UnitId)

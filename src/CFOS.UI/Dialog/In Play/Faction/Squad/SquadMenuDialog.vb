@@ -12,10 +12,13 @@ Friend Class SquadMenuDialog
 
     Public Overrides Function Run() As IDialog
         context.Clear()
-
+        Dim choices =
+            {
+            DialogChoice.CreateEnabled("Never Mind", Neutral.GetNextDialog(context, model.WorldModel)),
+            DialogChoice.Create(model.CanRecruit, "Recruit...", SquadRecruitMenuDialog.Launch(context, model))
+            }.Concat(model.UnitModels.Select(Function(x) DialogChoice.Create(True, x.GetName(), SquadDetailDialog.Launch(context, x))))
         Return context.Choose(
             "Squad Menu:",
-            DialogChoice.CreateEnabled("Never Mind", Neutral.GetNextDialog(context, model.WorldModel)),
-            DialogChoice.Create(model.CanRecruit, "Recruit...", SquadRecruitMenuDialog.Launch(context, model)))
+            choices.ToArray)
     End Function
 End Class
