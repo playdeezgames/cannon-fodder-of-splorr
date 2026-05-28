@@ -8,4 +8,5 @@
     ReadOnly Property Column As Integer
     ReadOnly Property Row As Integer
     ReadOnly Property HasUnit As Boolean
+    Property Unit As IUnit
 End Interface

@@ -23,6 +23,10 @@ Friend Class LocationModel
 
     Public ReadOnly Property Text As String Implements ILocationModel.Text
         Get
+            Dim unit = Me.UnitModel
+            If unit IsNot Nothing Then
+                Return unit.UnitTypeModel.Text
+            End If
             Dim feature = Me.FeatureModel
             If feature IsNot Nothing Then
                 Return feature.Text
@@ -81,6 +85,21 @@ Friend Class LocationModel
                 Return CFOS.Model.FeatureModel.Create(location.Feature)
             End If
             Return Nothing
+        End Get
+    End Property
+
+    Public ReadOnly Property UnitModel As IUnitModel Implements ILocationModel.UnitModel
+        Get
+            If location.HasUnit Then
+                Return CFOS.Model.UnitModel.Create(location.Unit)
+            End If
+            Return Nothing
+        End Get
+    End Property
+
+    Public ReadOnly Property LocationTypeModel As ILocationTypeModel Implements ILocationModel.LocationTypeModel
+        Get
+            Return CFOS.Model.LocationTypeModel.All(location.GetLocationType())
         End Get
     End Property
 

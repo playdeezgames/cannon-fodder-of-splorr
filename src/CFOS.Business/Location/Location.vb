@@ -56,6 +56,18 @@ Friend Class Location
         End Get
     End Property
 
+    Public Property Unit As IUnit Implements ILocation.Unit
+        Get
+            Return If(
+                EntityData.UnitId.HasValue,
+                CFOS.Business.Unit.Create(worldData, EntityData.UnitId.Value),
+                Nothing)
+        End Get
+        Set(value As IUnit)
+            EntityData.UnitId = value?.UnitId
+        End Set
+    End Property
+
     Friend Shared Function Create(worldData As WorldData, locationId As Guid) As ILocation
         Return New Location(worldData, locationId)
     End Function

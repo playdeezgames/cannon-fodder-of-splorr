@@ -19,6 +19,10 @@ Friend Class CradleLocationMenuDialog
         If feature IsNot Nothing Then
             context.WriteLine($"Feature Type: {feature.FeatureTypeName}")
         End If
+        Dim unit = model.UnitModel
+        If unit IsNot Nothing Then
+            context.WriteLine($"Unit Type: {unit.UnitTypeModel.UnitTypeName}")
+        End If
         Return context.Choose("Now What?", DialogChoice.Create(True, "Never Mind", Function() previousDialog))
     End Function
 

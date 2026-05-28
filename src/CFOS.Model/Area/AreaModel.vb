@@ -29,6 +29,12 @@ Friend Class AreaModel
         End Get
     End Property
 
+    Public ReadOnly Property AreaTypeModel As IAreaTypeModel Implements IAreaModel.AreaTypeModel
+        Get
+            Return CFOS.Model.AreaTypeModel.All(area.GetAreaType())
+        End Get
+    End Property
+
     Friend Shared Function Create(area As IArea) As IAreaModel
         Return New AreaModel(area)
     End Function

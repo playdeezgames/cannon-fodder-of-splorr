@@ -39,6 +39,12 @@ Friend Class FeatureModel
         End Get
     End Property
 
+    Public ReadOnly Property FeatureTypeModel As IFeatureTypeModel Implements IFeatureModel.FeatureTypeModel
+        Get
+            Return CFOS.Model.FeatureTypeModel.All(feature.GetFeatureType())
+        End Get
+    End Property
+
     Friend Shared Function Create(feature As IFeature) As IFeatureModel
         Return New FeatureModel(feature)
     End Function

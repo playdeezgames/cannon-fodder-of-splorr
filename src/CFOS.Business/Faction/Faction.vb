@@ -12,15 +12,16 @@ Friend Class Faction
         Return New Faction(worldData, factionId)
     End Function
 
-    Public Function CreateUnit(unitTypeId As String, location As ILocation) As IUnit Implements IFaction.CreateUnit
+    Public Function CreateUnit(location As ILocation) As IUnit Implements IFaction.CreateUnit
         Dim unitId = Guid.NewGuid
         worldData.Units(unitId) = New UnitData With
             {
-                .UnitType = unitTypeId,
                 .LocationId = location.LocationId,
                 .FactionId = FactionId}
         EntityData.UnitIds.Add(unitId)
-        Return Unit.Create(worldData, unitId)
+        Dim unit = CFOS.Business.Unit.Create(worldData, unitId)
+        location.Unit = unit
+        Return unit
     End Function
     Public ReadOnly Property FactionId As Guid Implements IFaction.FactionId
 

@@ -9,12 +9,6 @@ Friend Class Unit
         Me.UnitId = unitId
     End Sub
 
-    Public ReadOnly Property UnitType As String Implements IUnit.UnitType
-        Get
-            Return EntityData.UnitType
-        End Get
-    End Property
-
     Public ReadOnly Property UnitId As Guid Implements IUnit.UnitId
 
     Protected Overrides ReadOnly Property EntityData As UnitData

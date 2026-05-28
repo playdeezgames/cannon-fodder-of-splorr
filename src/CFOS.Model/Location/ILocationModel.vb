@@ -8,4 +8,6 @@ Public Interface ILocationModel
     ReadOnly Property LocationTypeName As String
     ReadOnly Property LocationTypeDescription As String
     ReadOnly Property FeatureModel As IFeatureModel
+    ReadOnly Property UnitModel As IUnitModel
+    ReadOnly Property LocationTypeModel As ILocationTypeModel
 End Interface
