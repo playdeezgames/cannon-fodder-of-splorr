@@ -19,7 +19,6 @@ Friend Class StagingMenuDialog
         context.WriteLine($"Squad Members: {squad.UnitCount}")
         Return context.Choose(
             "Now What?",
-            DialogChoice.CreateEnabled("Cradle...", CradleMenuDialog.Launch(context, model.Cradle)),
             DialogChoice.CreateEnabled("Squad...", SquadMenuDialog.Launch(context, squad)),
             DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model)),
             DialogChoice.CreateEnabled("Game Menu", GameMenuDialog.Launch(context, model)))

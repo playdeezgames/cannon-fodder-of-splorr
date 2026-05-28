@@ -11,7 +11,8 @@ Friend Class FeatureTypeModel
     Friend Shared ReadOnly All As IReadOnlyDictionary(Of String, IFeatureTypeModel) =
         New List(Of IFeatureTypeModel) From
         {
-            New FeatureTypeModel(FeatureTypes.CRYO_POD, "Cryo Pod", "@")
+            New FeatureTypeModel(FeatureTypes.CRYO_POD, "Cryo Pod", "@"),
+            New FeatureTypeModel(FeatureTypes.CONTROL_PANEL, "Control Panel", "!")
         }.ToDictionary(Function(x) x.Identifier, Function(x) x)
 
     Public ReadOnly Property Text As String Implements IFeatureTypeModel.Text

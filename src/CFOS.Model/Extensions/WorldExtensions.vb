@@ -4,7 +4,7 @@ Imports CFOS.Business
 Friend Module WorldExtensions
     Private ReadOnly initialCradleMap As String() =
         {
-            "##+##",
+            "##+!#",
             "#@.@#",
             "#...#",
             "#@.@#",
@@ -17,6 +17,7 @@ Friend Module WorldExtensions
         New Dictionary(Of Char, String) From
         {
             {"#"c, LocationTypes.BULKHEAD},
+            {"!"c, LocationTypes.BULKHEAD},
             {"+"c, LocationTypes.HATCH},
             {"@"c, LocationTypes.DECK},
             {"."c, LocationTypes.DECK}
@@ -26,7 +27,8 @@ Friend Module WorldExtensions
     Private ReadOnly featureTypeLegend As IReadOnlyDictionary(Of Char, String) =
         New Dictionary(Of Char, String) From
         {
-            {"@"c, FeatureTypes.CRYO_POD}
+            {"@"c, FeatureTypes.CRYO_POD},
+            {"!"c, FeatureTypes.CONTROL_PANEL}
         }
 #Enable Warning CA1859 ' Use concrete types when possible for improved performance
     <Extension>

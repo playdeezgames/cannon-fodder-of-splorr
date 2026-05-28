@@ -6,15 +6,19 @@ Friend Class CradleMenuDialog
 
     Private x As Integer
     Private y As Integer
+    Private ReadOnly nextDialog As Func(Of IDialog)
+    Private ReadOnly exitText As String
 
-    Private Sub New(context As IHostContext, model As IAreaModel)
+    Private Sub New(context As IHostContext, model As IAreaModel, exitText As String, nextDialog As Func(Of IDialog))
         MyBase.New(context, model)
         x = model.Columns \ 2
         y = model.Rows \ 2
+        Me.nextDialog = nextDialog
+        Me.exitText = exitText
     End Sub
 
-    Friend Shared Function Launch(context As IHostContext, model As IAreaModel) As Func(Of IDialog)
-        Return Function() New CradleMenuDialog(context, model)
+    Friend Shared Function Launch(context As IHostContext, model As IAreaModel, exitText As String, nextDialog As Func(Of IDialog)) As Func(Of IDialog)
+        Return Function() New CradleMenuDialog(context, model, exitText, nextDialog)
     End Function
 
     Public Overrides Function Run() As IDialog
@@ -38,11 +42,11 @@ Friend Class CradleMenuDialog
             End If
         Next
         context.WriteLine($"Location ({x}, {y})")
-        context.WriteLine("Arrows: move | Space/Enter: ENHANCE! | Escape: exit")
+        context.WriteLine($"Arrows: move | Space/Enter: ENHANCE! | Escape: {exitText}")
         Dim key = context.ReadKey()
         Select Case key
             Case Keys.Escape
-                Return Neutral.GetNextDialog(context, model.WorldModel).Invoke()
+                Return nextDialog.Invoke()
             Case Keys.LeftArrow
                 x = Math.Max(0, x - 1)
                 Return Me

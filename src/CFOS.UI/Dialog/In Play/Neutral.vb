@@ -3,6 +3,10 @@ Imports TGGD.UI
 
 Friend Module Neutral
     Friend Function GetNextDialog(context As IHostContext, model As IWorldModel) As Func(Of IDialog)
-        Return StagingMenuDialog.Launch(context, model)
+        Return CradleMenuDialog.Launch(
+            context,
+            model.Cradle,
+            "Game Menu",
+            GameMenuDialog.Launch(context, model))
     End Function
 End Module
