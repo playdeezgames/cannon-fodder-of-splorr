@@ -17,10 +17,8 @@ Friend Class FactionMenuDialog
         context.WriteLine($"Faction Name: {model.FactionName}")
         Return context.Choose(
             "Menu:",
-            DialogChoice.CreateEnabled(
-                "Never Mind",
-                Neutral.GetNextDialog(context, model)),
-        DialogChoice.CreateEnabled("Rename...", AddressOf RenameFaction))
+            NeverMindChoice,
+            DialogChoice.CreateEnabled("Rename...", AddressOf RenameFaction))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
@@ -29,6 +27,6 @@ Friend Class FactionMenuDialog
 
     Private Function RenameFaction() As IDialog
         model.FactionName = context.ReadString("New Faction Name:", model.FactionName)
-        Return Launch(context, model, exitDialog).Invoke()
+        Return Relaunch()
     End Function
 End Class

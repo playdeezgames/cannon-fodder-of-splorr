@@ -1,24 +1,20 @@
 ﻿Imports CFOS.Model
 Imports TGGD.UI
 
-Friend Class CradleMenuDialog
-    Inherits BaseModelDialog(Of IAreaModel)
+Friend Class CradleAreaMenuDialog
+    Inherits ExitableModelDialog(Of IAreaModel)
 
     Private x As Integer
     Private y As Integer
-    Private ReadOnly nextDialog As Func(Of IDialog)
-    Private ReadOnly exitText As String
 
-    Private Sub New(context As IHostContext, model As IAreaModel, exitText As String, nextDialog As Func(Of IDialog))
-        MyBase.New(context, model)
+    Private Sub New(context As IHostContext, model As IAreaModel, exitDialog As Func(Of IDialog))
+        MyBase.New(context, model, exitDialog)
         x = model.Columns \ 2
         y = model.Rows \ 2
-        Me.nextDialog = nextDialog
-        Me.exitText = exitText
     End Sub
 
-    Friend Shared Function Launch(context As IHostContext, model As IAreaModel, exitText As String, nextDialog As Func(Of IDialog)) As Func(Of IDialog)
-        Return Function() New CradleMenuDialog(context, model, exitText, nextDialog)
+    Friend Shared Function Launch(context As IHostContext, model As IAreaModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
+        Return Function() New CradleAreaMenuDialog(context, model, exitDialog)
     End Function
 
     Public Overrides Function Run() As IDialog
@@ -54,11 +50,11 @@ Friend Class CradleMenuDialog
             context.WriteLine($", {unit.GetName()}")
         End If
         context.WriteLine("")
-        context.WriteLine($"Arrows: move | Space/Enter: ENHANCE! | Escape: {exitText}")
+        context.WriteLine($"Arrows: move | Space/Enter: ENHANCE! | Escape: {NeverMindChoice.Text}")
         Dim key = context.ReadKey()
         Select Case key
             Case Keys.Escape
-                Return nextDialog.Invoke()
+                Return NeverMindChoice.NextDialog
             Case Keys.LeftArrow
                 x = Math.Max(0, x - 1)
                 Return Me
@@ -79,6 +75,6 @@ Friend Class CradleMenuDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model, exitText, nextDialog).Invoke
+        Return Launch(context, model, exitDialog).Invoke
     End Function
 End Class
