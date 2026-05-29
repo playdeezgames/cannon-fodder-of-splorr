@@ -15,7 +15,7 @@ Friend Class FactionUnitsMenuDialog
         Dim choices =
             {
             DialogChoice.CreateEnabled("Never Mind", exitDialog),
-            DialogChoice.Create(model.CanRecruit, "Recruit...", FactionUnitRecruitMenuDialog.Launch(context, model))
+            DialogChoice.Create(model.CanRecruit, "Recruit...", FactionUnitRecruitMenuDialog.Launch(context, model, Launch(context, model, exitDialog)))
             }.Concat(model.UnitModels.Select(Function(x) DialogChoice.Create(True, x.GetName(), FactionUnitDialog.Launch(context, x))))
         Return context.Choose(
             "Faction Units Menu:",
