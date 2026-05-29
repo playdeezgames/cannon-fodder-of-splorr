@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Business/">
     <Project Path="CFOS.Business/CFOS.Business.vbproj" />
+    <Project Path="TGGD.Business.Tests/TGGD.Business.Tests.vbproj" Id="ddbf9509-71d9-4bbf-95ee-fcd5cf5b5e97" />
     <Project Path="TGGD.Business/TGGD.Business.vbproj" />
   </Folder>
   <Folder Name="/Data/">
@@ -11,6 +12,7 @@
     <Project Path="CFOS.Model/CFOS.Model.vbproj" />
     <Project Path="TGGD.Model/TGGD.Model.vbproj" />
   </Folder>
+  <Folder Name="/Solution Items/" />
   <Folder Name="/UI/">
     <Project Path="CFOS.UI/CFOS.UI.vbproj" />
     <Project Path="TGGD.UI/TGGD.UI.vbproj" />

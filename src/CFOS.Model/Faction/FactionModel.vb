@@ -2,13 +2,13 @@
 Imports TGGD.Model
 
 Friend Class FactionModel
-    Inherits BaseModel
+    Inherits BaseModel(Of IFaction)
     Implements IFactionModel
 
     Private ReadOnly faction As IFaction
 
     Private Sub New(faction As IFaction)
-        Me.faction = faction
+        MyBase.New(faction)
     End Sub
 
     Public ReadOnly Property UnitCount As Integer Implements IFactionModel.UnitCount

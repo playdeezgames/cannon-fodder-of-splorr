@@ -1,27 +1,25 @@
 Imports CFOS.Business
 
 Public Class WorldModel
-    Inherits TGGD.Model.BaseModel
+    Inherits TGGD.Model.BaseModel(Of IWorld)
     Implements IWorldModel
 
-    Private ReadOnly world As IWorld
-
     Private Sub New(world As IWorld)
-        Me.world = world
+        MyBase.New(world)
     End Sub
 
     Public Property FactionName As String Implements IWorldModel.FactionName
         Get
-            Return world.GetFactionName()
+            Return Entity.GetFactionName()
         End Get
         Set(value As String)
-            world.SetFactionName(value)
+            Entity.SetFactionName(value)
         End Set
     End Property
 
     Public ReadOnly Property FactionModel As IFactionModel Implements IWorldModel.FactionModel
         Get
-            Return Model.FactionModel.Create(world.Player)
+            Return Model.FactionModel.Create(Entity.Player)
         End Get
     End Property
 
@@ -33,7 +31,7 @@ Public Class WorldModel
 
     Public ReadOnly Property CradleAreaModel As IAreaModel Implements IWorldModel.CradleAreaModel
         Get
-            Return AreaModel.Create(world.Player.Cradle)
+            Return AreaModel.Create(Entity.Player.Cradle)
         End Get
     End Property
 

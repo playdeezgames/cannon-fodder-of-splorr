@@ -2,36 +2,34 @@
 Imports TGGD.Model
 
 Friend Class AreaModel
-    Inherits BaseModel
+    Inherits BaseModel(Of IArea)
     Implements IAreaModel
 
-    Private ReadOnly area As IArea
-
     Private Sub New(area As IArea)
-        Me.area = area
+        MyBase.New(area)
     End Sub
 
     Public ReadOnly Property WorldModel As IWorldModel Implements IAreaModel.WorldModel
         Get
-            Return CFOS.Model.WorldModel.Create(area.World)
+            Return CFOS.Model.WorldModel.Create(Entity.World)
         End Get
     End Property
 
     Public ReadOnly Property Rows As Integer Implements IAreaModel.Rows
         Get
-            Return area.Rows
+            Return Entity.Rows
         End Get
     End Property
 
     Public ReadOnly Property Columns As Integer Implements IAreaModel.Columns
         Get
-            Return area.Columns
+            Return Entity.Columns
         End Get
     End Property
 
     Public ReadOnly Property AreaTypeModel As IAreaTypeModel Implements IAreaModel.AreaTypeModel
         Get
-            Return CFOS.Model.AreaTypeModel.All(area.GetAreaType())
+            Return CFOS.Model.AreaTypeModel.All(Entity.GetAreaType())
         End Get
     End Property
 
@@ -40,7 +38,7 @@ Friend Class AreaModel
     End Function
 
     Public Function GetLocationModel(column As Integer, row As Integer) As ILocationModel Implements IAreaModel.GetLocationModel
-        Dim location = area.GetLocation(column, row)
+        Dim location = Entity.GetLocation(column, row)
         If location IsNot Nothing Then
             Return LocationModel.Create(location)
         End If

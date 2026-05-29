@@ -1,7 +1,4 @@
-﻿Imports TGGD.Model
-
-Friend Class AreaTypeModel
-    Inherits BaseModel
+﻿Friend Class AreaTypeModel
     Implements IAreaTypeModel
     Private Sub New()
 

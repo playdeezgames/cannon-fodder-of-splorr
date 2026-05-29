@@ -2,30 +2,28 @@
 Imports TGGD.Model
 
 Friend Class LocationModel
-    Inherits BaseModel
+    Inherits BaseModel(Of ILocation)
     Implements ILocationModel
 
-    Private ReadOnly location As ILocation
-
     Private Sub New(location As ILocation)
-        Me.location = location
+        MyBase.New(location)
     End Sub
 
     Public ReadOnly Property Column As Integer Implements ILocationModel.Column
         Get
-            Return location.Column
+            Return Entity.Column
         End Get
     End Property
 
     Public ReadOnly Property Row As Integer Implements ILocationModel.Row
         Get
-            Return location.Row
+            Return Entity.Row
         End Get
     End Property
     Public ReadOnly Property FeatureModel As IFeatureModel Implements ILocationModel.FeatureModel
         Get
-            If location.HasFeature Then
-                Return CFOS.Model.FeatureModel.Create(location.Feature)
+            If Entity.HasFeature Then
+                Return CFOS.Model.FeatureModel.Create(Entity.Feature)
             End If
             Return Nothing
         End Get
@@ -33,8 +31,8 @@ Friend Class LocationModel
 
     Public ReadOnly Property UnitModel As IUnitModel Implements ILocationModel.UnitModel
         Get
-            If location.HasUnit Then
-                Return CFOS.Model.UnitModel.Create(location.Unit)
+            If Entity.HasUnit Then
+                Return CFOS.Model.UnitModel.Create(Entity.Unit)
             End If
             Return Nothing
         End Get
@@ -42,7 +40,7 @@ Friend Class LocationModel
 
     Public ReadOnly Property LocationTypeModel As ILocationTypeModel Implements ILocationModel.LocationTypeModel
         Get
-            Return CFOS.Model.LocationTypeModel.All(location.GetLocationType())
+            Return CFOS.Model.LocationTypeModel.All(Entity.GetLocationType())
         End Get
     End Property
 

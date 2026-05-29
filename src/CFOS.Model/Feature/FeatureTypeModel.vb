@@ -1,7 +1,4 @@
-﻿Imports TGGD.Model
-
-Friend Class FeatureTypeModel
-    Inherits BaseModel
+﻿Friend Class FeatureTypeModel
     Implements IFeatureTypeModel
     Private Sub New(
                    identifier As String,

@@ -1,4 +1,7 @@
-﻿Public Interface IFactionModel
+﻿Imports TGGD.Model
+
+Public Interface IFactionModel
+    Inherits IModel
     ReadOnly Property UnitCount As Integer
     Sub AddUnit(unitTypeModel As IUnitTypeModel)
     ReadOnly Property WorldModel As IWorldModel
