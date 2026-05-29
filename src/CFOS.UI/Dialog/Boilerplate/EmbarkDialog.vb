@@ -13,7 +13,7 @@ Friend Class EmbarkDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        Return CradleAreaMenuDialog.Launch(context, WorldModel.CreateAndInitialize(context.ReadString("Faction Name:", "Nacho Mamas")).CradleAreaModel, Function() Nothing).Invoke()
+        Return CradleAreaMenuDialog.Launch(context, WorldModel.CreateAndInitialize(context.ReadString("Faction Name:", "Nacho Mamas")).CradleAreaModel).Invoke()
     End Function
 
     Protected Overrides Function Relaunch() As IDialog

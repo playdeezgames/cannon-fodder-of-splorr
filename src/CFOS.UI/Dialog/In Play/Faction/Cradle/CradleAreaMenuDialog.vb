@@ -2,19 +2,19 @@
 Imports TGGD.UI
 
 Friend Class CradleAreaMenuDialog
-    Inherits ExitableModelDialog(Of IAreaModel)
+    Inherits BaseModelDialog(Of IAreaModel)
 
     Private x As Integer
     Private y As Integer
 
-    Private Sub New(context As IHostContext, model As IAreaModel, exitDialog As Func(Of IDialog))
-        MyBase.New(context, model, exitDialog)
+    Private Sub New(context As IHostContext, model As IAreaModel)
+        MyBase.New(context, model)
         x = model.Columns \ 2
         y = model.Rows \ 2
     End Sub
 
-    Friend Shared Function Launch(context As IHostContext, model As IAreaModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
-        Return Function() New CradleAreaMenuDialog(context, model, exitDialog)
+    Friend Shared Function Launch(context As IHostContext, model As IAreaModel) As Func(Of IDialog)
+        Return Function() New CradleAreaMenuDialog(context, model)
     End Function
 
     Public Overrides Function Run() As IDialog
@@ -50,11 +50,11 @@ Friend Class CradleAreaMenuDialog
             context.WriteLine($", {unit.GetName()}")
         End If
         context.WriteLine("")
-        context.WriteLine($"Arrows: move | Space/Enter: ENHANCE! | Escape: {NeverMindChoice.Text}")
+        context.WriteLine($"Arrows: move | Space/Enter: ENHANCE! | Escape: Game Menu")
         Dim key = context.ReadKey()
         Select Case key
             Case Keys.Escape
-                Return NeverMindChoice.NextDialog
+                Return GameMenuDialog.Launch(context, model.WorldModel, AddressOf Relaunch).Invoke
             Case Keys.LeftArrow
                 x = Math.Max(0, x - 1)
                 Return Me
@@ -75,6 +75,6 @@ Friend Class CradleAreaMenuDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model, exitDialog).Invoke
+        Return Launch(context, model).Invoke
     End Function
 End Class
