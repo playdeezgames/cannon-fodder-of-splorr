@@ -17,9 +17,9 @@ Friend Class UnitModel
         End Get
     End Property
 
-    Public ReadOnly Property SquadModel As ISquadModel Implements IUnitModel.SquadModel
+    Public ReadOnly Property FactionModel As IFactionModel Implements IUnitModel.FactionModel
         Get
-            Return CFOS.Model.SquadModel.Create(unit.Faction)
+            Return CFOS.Model.FactionModel.Create(unit.Faction)
         End Get
     End Property
 

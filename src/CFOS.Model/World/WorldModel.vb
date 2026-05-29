@@ -19,9 +19,9 @@ Public Class WorldModel
         End Set
     End Property
 
-    Public ReadOnly Property Squad As ISquadModel Implements IWorldModel.Squad
+    Public ReadOnly Property FactionModel As IFactionModel Implements IWorldModel.FactionModel
         Get
-            Return SquadModel.Create(world.Player)
+            Return Model.FactionModel.Create(world.Player)
         End Get
     End Property
 
@@ -31,7 +31,7 @@ Public Class WorldModel
         End Get
     End Property
 
-    Public ReadOnly Property Cradle As IAreaModel Implements IWorldModel.Cradle
+    Public ReadOnly Property CradleAreaModel As IAreaModel Implements IWorldModel.CradleAreaModel
         Get
             Return AreaModel.Create(world.Player.Cradle)
         End Get

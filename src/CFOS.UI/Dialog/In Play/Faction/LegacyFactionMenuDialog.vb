@@ -1,7 +1,7 @@
 ﻿Imports CFOS.Model
 Imports TGGD.UI
 
-Friend Class FactionMenuDialog
+Friend Class LegacyFactionMenuDialog
     Inherits BaseModelDialog(Of IWorldModel)
 
     Private Sub New(context As IHostContext, model As IWorldModel)
@@ -9,7 +9,7 @@ Friend Class FactionMenuDialog
     End Sub
 
     Friend Shared Function Launch(context As IHostContext, model As IWorldModel) As Func(Of IDialog)
-        Return Function() New FactionMenuDialog(context, model)
+        Return Function() New LegacyFactionMenuDialog(context, model)
     End Function
 
     Public Overrides Function Run() As IDialog

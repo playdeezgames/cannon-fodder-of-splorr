@@ -1,7 +1,7 @@
 ﻿Imports CFOS.Model
 Imports TGGD.UI
 
-Friend Class SquadDetailDialog
+Friend Class FactionUnitDialog
     Inherits BaseModelDialog(Of IUnitModel)
 
     Private Sub New(context As IHostContext, model As IUnitModel)
@@ -9,13 +9,13 @@ Friend Class SquadDetailDialog
     End Sub
 
     Friend Shared Function Launch(context As IHostContext, model As IUnitModel) As Func(Of IDialog)
-        Return Function() New SquadDetailDialog(context, model)
+        Return Function() New FactionUnitDialog(context, model)
     End Function
 
     Public Overrides Function Run() As IDialog
         context.WriteLine($"Unit: {model.GetName()}")
         Return context.Choose(
             "Now What?",
-            DialogChoice.CreateEnabled("Never Mind", SquadMenuDialog.Launch(context, model.SquadModel)))
+            DialogChoice.CreateEnabled("Never Mind", FactionUnitsMenuDialog.Launch(context, model.FactionModel)))
     End Function
 End Class

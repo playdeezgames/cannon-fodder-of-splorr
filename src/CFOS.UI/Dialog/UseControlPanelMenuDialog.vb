@@ -18,7 +18,7 @@ Friend Class UseControlPanelMenuDialog
             "Now What?",
             DialogChoice.Create(exitDialog IsNot Nothing, "Never Mind", exitDialog),
             DialogChoice.CreateEnabled(
-                "Squad...",
-                SquadMenuDialog.Launch(context, model.SquadModel)))
+                "Units...",
+                FactionUnitsMenuDialog.Launch(context, model.FactionModel)))
     End Function
 End Class
