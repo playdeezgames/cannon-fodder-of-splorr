@@ -1,24 +1,14 @@
-﻿Imports System.Text
-Imports Spectre.Console
+﻿Imports Spectre.Console
 Imports TGGD.UI
 
 Friend Class CFOSHostContext
     Implements IHostContext
 
-    Private ReadOnly buffer As New StringBuilder
-
     Public Sub WriteLine(text As String) Implements IHostContext.WriteLine
-        buffer.AppendLine(text)
-    End Sub
-
-    Private Sub Render()
-        AnsiConsole.Clear()
-        AnsiConsole.Markup(buffer.ToString())
-        buffer.Clear()
+        AnsiConsole.WriteLine(text)
     End Sub
 
     Public Sub Pause() Implements IHostContext.Pause
-        Render()
         Dim prompt As New SelectionPrompt(Of String) With
             {
                 .Title = String.Empty
@@ -28,11 +18,11 @@ Friend Class CFOSHostContext
     End Sub
 
     Public Sub Clear() Implements IHostContext.Clear
-        buffer.Clear()
+        AnsiConsole.Clear()
     End Sub
 
     Public Sub WriteString(text As String) Implements IHostContext.WriteString
-        buffer.Append(text)
+        AnsiConsole.Markup(text)
     End Sub
 
     Public Function Choose(title As String, ParamArray choices As IDialogChoice()) As IDialog Implements IHostContext.Choose
@@ -42,7 +32,6 @@ Friend Class CFOSHostContext
                 .Converter = Function(x) x.Text
             }
         prompt.AddChoices(choices.Where(Function(x) x.Enabled))
-        Render()
         Return AnsiConsole.Prompt(prompt).NextDialog
     End Function
 
@@ -50,12 +39,10 @@ Friend Class CFOSHostContext
         If defaultValue IsNot Nothing Then
             Return AnsiConsole.Ask(Of String)(text, defaultValue)
         End If
-        Render()
         Return AnsiConsole.Ask(Of String)(text)
     End Function
 
     Public Function ReadKey() As String Implements IHostContext.ReadKey
-        Render()
         Return Console.ReadKey(True).Key.ToString
     End Function
 End Class
