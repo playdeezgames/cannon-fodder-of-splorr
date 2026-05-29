@@ -26,7 +26,7 @@ Friend Class CradleLocationMenuDialog
         Dim choices =
             {
                 DialogChoice.Create(True, "Never Mind", Function() previousDialog)
-            }.Concat(feature.GetInterations())
+            }.Concat(feature.GetInterations(context, Function() Me))
         Return context.Choose("Now What?", choices.ToArray)
     End Function
 
