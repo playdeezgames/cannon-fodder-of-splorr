@@ -24,4 +24,8 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     Public Function GetStatistic(statisticId As String) As Integer Implements IEntity.GetStatistic
         Return EntityData.Statistics(statisticId)
     End Function
+
+    Public Function GetFlag(flagId As String) As Boolean Implements IEntity.GetFlag
+        Return EntityData.Flags.Contains(flagId)
+    End Function
 End Class
