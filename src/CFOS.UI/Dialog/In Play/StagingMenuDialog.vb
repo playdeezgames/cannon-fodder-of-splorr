@@ -20,7 +20,7 @@ Friend Class StagingMenuDialog
         Return context.Choose(
             "Now What?",
             DialogChoice.CreateEnabled("Units...", FactionUnitsMenuDialog.Launch(context, faction)),
-            DialogChoice.CreateEnabled("Faction...", LegacyFactionMenuDialog.Launch(context, model)),
+            DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model)),
             DialogChoice.CreateEnabled("Game Menu", GameMenuDialog.Launch(context, model)))
     End Function
 End Class
