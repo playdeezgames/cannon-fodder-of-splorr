@@ -9,4 +9,9 @@ Friend MustInherit Class ExitableModelDialog(Of TModel)
         MyBase.New(context, model)
         Me.exitDialog = exitDialog
     End Sub
+    Protected ReadOnly Property NeverMindChoice As IDialogChoice
+        Get
+            Return DialogChoice.Create(exitDialog IsNot Nothing, "Never Mind", exitDialog)
+        End Get
+    End Property
 End Class

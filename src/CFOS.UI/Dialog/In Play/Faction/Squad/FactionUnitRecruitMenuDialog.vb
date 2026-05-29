@@ -28,4 +28,8 @@ Friend Class FactionUnitRecruitMenuDialog
             }.
             Concat(choices).ToArray)
     End Function
+
+    Protected Overrides Function Relaunch() As IDialog
+        Return Launch(context, model, exitDialog).Invoke
+    End Function
 End Class

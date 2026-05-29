@@ -16,10 +16,16 @@ Friend Class UseControlPanelMenuDialog
         context.WriteLine("Yer using the control panel!")
         Return context.Choose(
             "Now What?",
-            DialogChoice.Create(exitDialog IsNot Nothing, "Never Mind", exitDialog),
+            NeverMindChoice,
             DialogChoice.CreateEnabled(
                 "Units...",
-                FactionUnitsMenuDialog.Launch(context, model.FactionModel, Launch(context, model, exitDialog))),
-            DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model.FactionModel.WorldModel, Launch(context, model, exitDialog))))
+                FactionUnitsMenuDialog.Launch(context, model.FactionModel, AddressOf Relaunch)),
+            DialogChoice.CreateEnabled(
+                "Faction...",
+                FactionMenuDialog.Launch(context, model.FactionModel.WorldModel, AddressOf Relaunch)))
+    End Function
+
+    Protected Overrides Function Relaunch() As IDialog
+        Return Launch(context, model, exitDialog).Invoke
     End Function
 End Class

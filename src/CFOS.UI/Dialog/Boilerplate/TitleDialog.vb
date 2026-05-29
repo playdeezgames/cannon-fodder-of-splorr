@@ -18,4 +18,8 @@ Friend Class TitleDialog
     Friend Shared Function Launch(context As IHostContext) As Func(Of IDialog)
         Return Function() New TitleDialog(context)
     End Function
+
+    Protected Overrides Function Relaunch() As IDialog
+        Return Launch(context).Invoke
+    End Function
 End Class

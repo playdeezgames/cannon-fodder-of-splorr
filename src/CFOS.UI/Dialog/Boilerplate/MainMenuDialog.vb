@@ -25,4 +25,8 @@ Friend Class MainMenuDialog
                                  context As IHostContext) As Func(Of IDialog)
         Return Function() New MainMenuDialog(context)
     End Function
+
+    Protected Overrides Function Relaunch() As IDialog
+        Return Launch(context).Invoke()
+    End Function
 End Class

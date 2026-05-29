@@ -15,4 +15,8 @@ Friend Class EmbarkDialog
     Public Overrides Function Run() As IDialog
         Return Neutral.GetNextDialog(context, WorldModel.CreateAndInitialize(context.ReadString("Faction Name:", "Nacho Mamas"))).Invoke()
     End Function
+
+    Protected Overrides Function Relaunch() As IDialog
+        Return Launch(context).Invoke()
+    End Function
 End Class

@@ -10,4 +10,5 @@ Friend MustInherit Class BaseDialog
     End Sub
 
     Public MustOverride Function Run() As IDialog Implements IDialog.Run
+    Protected MustOverride Function Relaunch() As IDialog
 End Class

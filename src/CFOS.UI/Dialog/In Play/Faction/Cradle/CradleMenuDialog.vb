@@ -77,4 +77,8 @@ Friend Class CradleMenuDialog
                 Return Me
         End Select
     End Function
+
+    Protected Overrides Function Relaunch() As IDialog
+        Return Launch(context, model, exitText, nextDialog).Invoke
+    End Function
 End Class

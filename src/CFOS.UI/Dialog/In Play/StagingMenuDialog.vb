@@ -23,4 +23,8 @@ Friend Class StagingMenuDialog
             DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model, Launch(context, model))),
             DialogChoice.CreateEnabled("Game Menu", GameMenuDialog.Launch(context, model)))
     End Function
+
+    Protected Overrides Function Relaunch() As IDialog
+        Throw New NotImplementedException()
+    End Function
 End Class

@@ -32,4 +32,8 @@ Friend Class ConfirmDialog
             DialogChoice.CreateEnabled("No", onCancel),
             DialogChoice.CreateEnabled("Yes", onConfirm))
     End Function
+
+    Protected Overrides Function Relaunch() As IDialog
+        Return Launch(context, text, onConfirm, onCancel).Invoke()
+    End Function
 End Class

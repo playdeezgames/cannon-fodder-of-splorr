@@ -33,4 +33,8 @@ Friend Class CradleLocationMenuDialog
     Friend Shared Function Launch(context As IHostContext, model As ILocationModel, previousDialog As IDialog) As Func(Of IDialog)
         Return Function() New CradleLocationMenuDialog(context, model, previousDialog)
     End Function
+
+    Protected Overrides Function Relaunch() As IDialog
+        Return Launch(context, model, previousDialog).Invoke
+    End Function
 End Class

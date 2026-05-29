@@ -23,6 +23,10 @@ Friend Class FactionMenuDialog
         DialogChoice.CreateEnabled("Rename...", AddressOf RenameFaction))
     End Function
 
+    Protected Overrides Function Relaunch() As IDialog
+        Return Launch(context, model, exitDialog).Invoke
+    End Function
+
     Private Function RenameFaction() As IDialog
         model.FactionName = context.ReadString("New Faction Name:", model.FactionName)
         Return Launch(context, model, exitDialog).Invoke()

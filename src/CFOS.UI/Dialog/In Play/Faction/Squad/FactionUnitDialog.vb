@@ -18,4 +18,8 @@ Friend Class FactionUnitDialog
             "Now What?",
             DialogChoice.CreateEnabled("Never Mind", FactionUnitsMenuDialog.Launch(context, model.FactionModel, Launch(context, model))))
     End Function
+
+    Protected Overrides Function Relaunch() As IDialog
+        Return Launch(context, model).Invoke
+    End Function
 End Class
