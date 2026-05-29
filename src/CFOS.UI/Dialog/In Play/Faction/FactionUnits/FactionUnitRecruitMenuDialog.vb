@@ -1,25 +1,30 @@
 ﻿Imports CFOS.Model
 Imports TGGD.UI
 
-Friend Class FactionUnitsMenuDialog
+Friend Class FactionUnitRecruitMenuDialog
     Inherits ExitableModelDialog(Of IFactionModel)
+
     Private Sub New(context As IHostContext, model As IFactionModel, exitDialog As Func(Of IDialog))
         MyBase.New(context, model, exitDialog)
     End Sub
+
     Friend Shared Function Launch(context As IHostContext, model As IFactionModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
-        Return Function() New FactionUnitsMenuDialog(context, model, exitDialog)
+        Return Function() New FactionUnitRecruitMenuDialog(context, model, exitDialog)
     End Function
 
     Public Overrides Function Run() As IDialog
         context.Clear()
-        Dim choices =
+        Dim choices = model.
+            WorldModel.
+            AvailableUnitTypes.
+            Select(Function(x) DialogChoice.CreateEnabled(
+                x.UnitTypeName,
+                FactionUnitRecruitUnitTypeMenuDialog.Launch(context, model, x, exitDialog)))
+        Return context.Choose("Recruit Whom:",
             {
-            DialogChoice.CreateEnabled("Never Mind", exitDialog),
-            DialogChoice.Create(model.CanRecruit, "Recruit...", FactionUnitRecruitMenuDialog.Launch(context, model, Launch(context, model, exitDialog)))
-            }.Concat(model.UnitModels.Select(Function(x) DialogChoice.Create(True, x.GetName(), FactionUnitDialog.Launch(context, x))))
-        Return context.Choose(
-            "Faction Units Menu:",
-            choices.ToArray)
+                NeverMindChoice
+            }.
+            Concat(choices).ToArray)
     End Function
 
     Protected Overrides Function Relaunch() As IDialog

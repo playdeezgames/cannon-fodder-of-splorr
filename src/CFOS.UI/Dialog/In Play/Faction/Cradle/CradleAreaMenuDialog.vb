@@ -7,14 +7,14 @@ Friend Class CradleAreaMenuDialog
     Private x As Integer
     Private y As Integer
 
-    Private Sub New(context As IHostContext, model As IAreaModel)
+    Private Sub New(context As IHostContext, model As IAreaModel, Optional x As Integer? = Nothing, Optional y As Integer? = Nothing)
         MyBase.New(context, model)
-        x = model.Columns \ 2
-        y = model.Rows \ 2
+        Me.x = If(x.HasValue, Math.Clamp(x.Value, 0, model.Columns - 1), model.Columns \ 2)
+        Me.y = If(y.HasValue, Math.Clamp(y.Value, 0, model.Rows - 1), model.Rows \ 2)
     End Sub
 
-    Friend Shared Function Launch(context As IHostContext, model As IAreaModel) As Func(Of IDialog)
-        Return Function() New CradleAreaMenuDialog(context, model)
+    Friend Shared Function Launch(context As IHostContext, model As IAreaModel, Optional x As Integer? = Nothing, Optional y As Integer? = Nothing) As Func(Of IDialog)
+        Return Function() New CradleAreaMenuDialog(context, model, x, y)
     End Function
 
     Public Overrides Function Run() As IDialog
@@ -68,13 +68,13 @@ Friend Class CradleAreaMenuDialog
                 y = Math.Min(model.Rows - 1, y + 1)
                 Return Me
             Case Keys.Spacebar, Keys.Enter
-                Return CradleLocationMenuDialog.Launch(context, model.GetLocationModel(x, y), Me).Invoke()
+                Return CradleLocationMenuDialog.Launch(context, model.GetLocationModel(x, y), AddressOf Relaunch).Invoke()
             Case Else
                 Return Me
         End Select
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model).Invoke
+        Return Launch(context, model, x, y).Invoke
     End Function
 End Class

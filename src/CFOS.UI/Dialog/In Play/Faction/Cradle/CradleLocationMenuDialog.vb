@@ -2,13 +2,10 @@
 Imports TGGD.UI
 
 Friend Class CradleLocationMenuDialog
-    Inherits BaseModelDialog(Of ILocationModel)
+    Inherits ExitableModelDialog(Of ILocationModel)
 
-    Private ReadOnly previousDialog As IDialog
-
-    Private Sub New(context As IHostContext, model As ILocationModel, previousDialog As IDialog)
-        MyBase.New(context, model)
-        Me.previousDialog = previousDialog
+    Private Sub New(context As IHostContext, model As ILocationModel, exitDialog As Func(Of IDialog))
+        MyBase.New(context, model, exitDialog)
     End Sub
 
     Public Overrides Function Run() As IDialog
@@ -25,16 +22,16 @@ Friend Class CradleLocationMenuDialog
         End If
         Dim choices =
             {
-                DialogChoice.Create(True, "Never Mind", Function() previousDialog)
-            }.Concat(feature.GetInterations(context, Function() Me))
+                NeverMindChoice
+            }.Concat(feature.GetInterations(context, AddressOf Relaunch))
         Return context.Choose("Now What?", choices.ToArray)
     End Function
 
-    Friend Shared Function Launch(context As IHostContext, model As ILocationModel, previousDialog As IDialog) As Func(Of IDialog)
-        Return Function() New CradleLocationMenuDialog(context, model, previousDialog)
+    Friend Shared Function Launch(context As IHostContext, model As ILocationModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
+        Return Function() New CradleLocationMenuDialog(context, model, exitDialog)
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model, previousDialog).Invoke
+        Return Launch(context, model, exitDialog).Invoke
     End Function
 End Class
