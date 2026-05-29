@@ -7,6 +7,6 @@ Friend Module Neutral
             context,
             model.CradleAreaModel,
             "Game Menu",
-            GameMenuDialog.Launch(context, model))
+            GameMenuDialog.Launch(context, model, GetNextDialog(context, model)))
     End Function
 End Module
