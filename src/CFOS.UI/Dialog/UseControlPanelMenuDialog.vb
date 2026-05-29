@@ -2,7 +2,7 @@
 Imports TGGD.UI
 
 Friend Class UseControlPanelMenuDialog
-    Inherits ExitableModelDialog(Of IFeatureModel)
+    Inherits ExitableModelDialog(Of IHostContext, IFeatureModel)
 
     Private Sub New(context As IHostContext, model As IFeatureModel, exitDialog As Func(Of IDialog))
         MyBase.New(context, model, exitDialog)
@@ -13,19 +13,19 @@ Friend Class UseControlPanelMenuDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        context.WriteLine("Yer using the control panel!")
-        Return context.Choose(
+        Context.WriteLine("Yer using the control panel!")
+        Return Context.Choose(
             "Now What?",
-            NeverMindChoice,
+            ExitChoice,
             DialogChoice.CreateEnabled(
                 "Units...",
-                FactionUnitsMenuDialog.Launch(context, model.FactionModel, AddressOf Relaunch)),
+                FactionUnitsMenuDialog.Launch(Context, Model.FactionModel, AddressOf Relaunch)),
             DialogChoice.CreateEnabled(
                 "Faction...",
-                FactionMenuDialog.Launch(context, model.FactionModel.WorldModel, AddressOf Relaunch)))
+                FactionMenuDialog.Launch(Context, Model.FactionModel.WorldModel, AddressOf Relaunch)))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model, exitDialog).Invoke
+        Return Launch(Context, Model, EditDialog).Invoke
     End Function
 End Class

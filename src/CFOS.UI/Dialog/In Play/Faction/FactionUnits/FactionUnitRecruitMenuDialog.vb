@@ -2,7 +2,7 @@
 Imports TGGD.UI
 
 Friend Class FactionUnitRecruitMenuDialog
-    Inherits ExitableModelDialog(Of IFactionModel)
+    Inherits ExitableModelDialog(Of IHostContext, IFactionModel)
 
     Private Sub New(context As IHostContext, model As IFactionModel, exitDialog As Func(Of IDialog))
         MyBase.New(context, model, exitDialog)
@@ -13,21 +13,21 @@ Friend Class FactionUnitRecruitMenuDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        context.Clear()
-        Dim choices = model.
+        Context.Clear()
+        Dim choices = Model.
             WorldModel.
             AvailableUnitTypes.
             Select(Function(x) DialogChoice.CreateEnabled(
                 x.UnitTypeName,
-                FactionUnitRecruitUnitTypeMenuDialog.Launch(context, model, x, exitDialog)))
-        Return context.Choose("Recruit Whom:",
+                FactionUnitRecruitUnitTypeMenuDialog.Launch(Context, Model, x, EditDialog)))
+        Return Context.Choose("Recruit Whom:",
             {
-                NeverMindChoice
+                ExitChoice
             }.
             Concat(choices).ToArray)
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model, exitDialog).Invoke
+        Return Launch(Context, Model, EditDialog).Invoke
     End Function
 End Class

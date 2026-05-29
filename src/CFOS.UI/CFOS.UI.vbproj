@@ -19,4 +19,8 @@
     <ProjectReference Include="..\TGGD.UI\TGGD.UI.vbproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dialog\Base\" />
+  </ItemGroup>
+
 </Project>

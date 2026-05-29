@@ -2,7 +2,7 @@
 Imports TGGD.UI
 
 Friend Class FactionUnitRecruitUnitTypeMenuDialog
-    Inherits ExitableModelDialog(Of IFactionModel)
+    Inherits ExitableModelDialog(Of IHostContext, IFactionModel)
 
     Private ReadOnly unitTypeModel As IUnitTypeModel
 
@@ -16,11 +16,11 @@ Friend Class FactionUnitRecruitUnitTypeMenuDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        model.AddUnit(unitTypeModel)
-        Return exitDialog.Invoke()
+        Model.AddUnit(unitTypeModel)
+        Return EditDialog.Invoke()
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model, unitTypeModel, exitDialog).Invoke
+        Return Launch(Context, Model, unitTypeModel, EditDialog).Invoke
     End Function
 End Class

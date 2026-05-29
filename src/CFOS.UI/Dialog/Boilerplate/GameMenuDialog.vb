@@ -2,7 +2,7 @@
 Imports TGGD.UI
 
 Friend Class GameMenuDialog
-    Inherits ExitableModelDialog(Of IWorldModel)
+    Inherits ExitableModelDialog(Of IHostContext, IWorldModel)
 
     Private Sub New(context As IHostContext, model As IWorldModel, exitDialog As Func(Of IDialog))
         MyBase.New(context, model, exitDialog)
@@ -13,19 +13,19 @@ Friend Class GameMenuDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        Return context.Choose(
+        Return Context.Choose(
             "Game Menu:",
-            NeverMindChoice,
+            ExitChoice,
             DialogChoice.CreateEnabled(
                 "Abandon Game",
                 ConfirmDialog.Launch(
-                    context,
+                    Context,
                     "Are you sure you want to abandon?",
-                    MainMenuDialog.Launch(context),
+                    MainMenuDialog.Launch(Context),
                     AddressOf Relaunch)))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model, exitDialog).Invoke()
+        Return Launch(Context, Model, EditDialog).Invoke()
     End Function
 End Class

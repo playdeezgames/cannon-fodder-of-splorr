@@ -1,7 +1,7 @@
 ﻿Imports TGGD.UI
 
 Friend Class ConfirmDialog
-    Inherits BaseDialog
+    Inherits BaseDialog(Of IHostContext)
 
     Private ReadOnly text As String
     Private ReadOnly onConfirm As Func(Of IDialog)
@@ -27,13 +27,13 @@ Friend Class ConfirmDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        Return context.Choose(
+        Return Context.Choose(
             text,
             DialogChoice.CreateEnabled("No", onCancel),
             DialogChoice.CreateEnabled("Yes", onConfirm))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, text, onConfirm, onCancel).Invoke()
+        Return Launch(Context, text, onConfirm, onCancel).Invoke()
     End Function
 End Class

@@ -2,7 +2,7 @@
 Imports TGGD.UI
 
 Friend Class EmbarkDialog
-    Inherits BaseDialog
+    Inherits BaseDialog(Of IHostContext)
 
     Private Sub New(context As IHostContext)
         MyBase.New(context)
@@ -13,10 +13,10 @@ Friend Class EmbarkDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        Return CradleAreaMenuDialog.Launch(context, WorldModel.CreateAndInitialize(context.ReadString("Faction Name:", "Nacho Mamas")).CradleAreaModel).Invoke()
+        Return CradleAreaMenuDialog.Launch(Context, WorldModel.CreateAndInitialize(Context.ReadString("Faction Name:", "Nacho Mamas")).CradleAreaModel).Invoke()
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context).Invoke()
+        Return Launch(Context).Invoke()
     End Function
 End Class

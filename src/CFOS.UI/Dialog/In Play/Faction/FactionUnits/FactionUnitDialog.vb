@@ -2,7 +2,7 @@
 Imports TGGD.UI
 
 Friend Class FactionUnitDialog
-    Inherits ExitableModelDialog(Of IUnitModel)
+    Inherits ExitableModelDialog(Of IHostContext, IUnitModel)
 
     Private Sub New(context As IHostContext, model As IUnitModel, exitDialog As Func(Of IDialog))
         MyBase.New(context, model, exitDialog)
@@ -13,13 +13,13 @@ Friend Class FactionUnitDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        context.WriteLine($"Unit: {model.GetName()}")
-        Return context.Choose(
+        Context.WriteLine($"Unit: {Model.GetName()}")
+        Return Context.Choose(
             "Now What?",
-            NeverMindChoice)
+            ExitChoice)
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model, exitDialog).Invoke
+        Return Launch(Context, Model, EditDialog).Invoke
     End Function
 End Class

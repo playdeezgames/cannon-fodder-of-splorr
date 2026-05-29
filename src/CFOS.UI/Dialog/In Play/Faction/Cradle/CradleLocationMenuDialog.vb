@@ -2,29 +2,29 @@
 Imports TGGD.UI
 
 Friend Class CradleLocationMenuDialog
-    Inherits ExitableModelDialog(Of ILocationModel)
+    Inherits ExitableModelDialog(Of IHostContext, ILocationModel)
 
     Private Sub New(context As IHostContext, model As ILocationModel, exitDialog As Func(Of IDialog))
         MyBase.New(context, model, exitDialog)
     End Sub
 
     Public Overrides Function Run() As IDialog
-        context.WriteLine($"Location: ({model.Column}, {model.Row})")
-        context.WriteLine($"Location Type: {model.LocationTypeModel.LocationTypeName}")
-        context.WriteLine($"Description: {model.LocationTypeModel.LocationTypeDescription}")
-        Dim feature = model.FeatureModel
+        Context.WriteLine($"Location: ({Model.Column}, {Model.Row})")
+        Context.WriteLine($"Location Type: {Model.LocationTypeModel.LocationTypeName}")
+        Context.WriteLine($"Description: {Model.LocationTypeModel.LocationTypeDescription}")
+        Dim feature = Model.FeatureModel
         If feature IsNot Nothing Then
-            context.WriteLine($"Feature Type: {feature.FeatureTypeModel.Name}")
+            Context.WriteLine($"Feature Type: {feature.FeatureTypeModel.Name}")
         End If
-        Dim unit = model.UnitModel
+        Dim unit = Model.UnitModel
         If unit IsNot Nothing Then
-            context.WriteLine($"Unit Type: {unit.UnitTypeModel.UnitTypeName}")
+            Context.WriteLine($"Unit Type: {unit.UnitTypeModel.UnitTypeName}")
         End If
         Dim choices =
             {
-                NeverMindChoice
-            }.Concat(feature.GetInterations(context, AddressOf Relaunch))
-        Return context.Choose("Now What?", choices.ToArray)
+                ExitChoice
+            }.Concat(feature.GetInterations(Context, AddressOf Relaunch))
+        Return Context.Choose("Now What?", choices.ToArray)
     End Function
 
     Friend Shared Function Launch(context As IHostContext, model As ILocationModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
@@ -32,6 +32,6 @@ Friend Class CradleLocationMenuDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model, exitDialog).Invoke
+        Return Launch(Context, Model, EditDialog).Invoke
     End Function
 End Class

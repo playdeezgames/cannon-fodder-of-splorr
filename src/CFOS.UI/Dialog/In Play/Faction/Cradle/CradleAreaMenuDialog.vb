@@ -2,7 +2,7 @@
 Imports TGGD.UI
 
 Friend Class CradleAreaMenuDialog
-    Inherits BaseModelDialog(Of IAreaModel)
+    Inherits BaseModelDialog(Of IHostContext, IAreaModel)
 
     Private x As Integer
     Private y As Integer
@@ -18,63 +18,63 @@ Friend Class CradleAreaMenuDialog
     End Function
 
     Public Overrides Function Run() As IDialog
-        context.Clear()
+        Context.Clear()
         Dim location As ILocationModel
-        For Each row In Enumerable.Range(0, model.Rows)
-            For Each column In Enumerable.Range(0, model.Columns)
+        For Each row In Enumerable.Range(0, Model.Rows)
+            For Each column In Enumerable.Range(0, Model.Columns)
                 If x = column AndAlso y = row Then
-                    context.WriteString("[[")
+                    Context.WriteString("[[")
                 ElseIf x = column - 1 AndAlso y = row Then
-                    context.WriteString("]]")
+                    Context.WriteString("]]")
                 Else
-                    context.WriteString(" ")
+                    Context.WriteString(" ")
                 End If
-                location = model.GetLocationModel(column, row)
-                context.WriteString(location.GetText())
+                location = Model.GetLocationModel(column, row)
+                Context.WriteString(location.GetText())
             Next
-            If x = model.Columns - 1 AndAlso y = row Then
-                context.WriteLine("]]")
+            If x = Model.Columns - 1 AndAlso y = row Then
+                Context.WriteLine("]]")
             Else
-                context.WriteLine(" ")
+                Context.WriteLine(" ")
             End If
         Next
-        context.WriteString($"Location ({x}, {y}): ")
-        location = model.GetLocationModel(x, y)
-        context.WriteString(location.LocationTypeModel.LocationTypeName)
+        Context.WriteString($"Location ({x}, {y}): ")
+        location = Model.GetLocationModel(x, y)
+        Context.WriteString(location.LocationTypeModel.LocationTypeName)
         Dim feature = location.FeatureModel
         If feature IsNot Nothing Then
-            context.WriteString($", {feature.FeatureTypeModel.Name}")
+            Context.WriteString($", {feature.FeatureTypeModel.Name}")
         End If
         Dim unit = location.UnitModel
         If unit IsNot Nothing Then
-            context.WriteLine($", {unit.GetName()}")
+            Context.WriteLine($", {unit.GetName()}")
         End If
-        context.WriteLine("")
-        context.WriteLine($"Arrows: move | Space/Enter: ENHANCE! | Escape: Game Menu")
-        Dim key = context.ReadKey()
+        Context.WriteLine("")
+        Context.WriteLine($"Arrows: move | Space/Enter: ENHANCE! | Escape: Game Menu")
+        Dim key = Context.ReadKey()
         Select Case key
             Case Keys.Escape
-                Return GameMenuDialog.Launch(context, model.WorldModel, AddressOf Relaunch).Invoke
+                Return GameMenuDialog.Launch(Context, Model.WorldModel, AddressOf Relaunch).Invoke
             Case Keys.LeftArrow
                 x = Math.Max(0, x - 1)
                 Return Me
             Case Keys.RightArrow
-                x = Math.Min(model.Columns - 1, x + 1)
+                x = Math.Min(Model.Columns - 1, x + 1)
                 Return Me
             Case Keys.UpArrow
                 y = Math.Max(0, y - 1)
                 Return Me
             Case Keys.DownArrow
-                y = Math.Min(model.Rows - 1, y + 1)
+                y = Math.Min(Model.Rows - 1, y + 1)
                 Return Me
             Case Keys.Spacebar, Keys.Enter
-                Return CradleLocationMenuDialog.Launch(context, model.GetLocationModel(x, y), AddressOf Relaunch).Invoke()
+                Return CradleLocationMenuDialog.Launch(Context, Model.GetLocationModel(x, y), AddressOf Relaunch).Invoke()
             Case Else
                 Return Me
         End Select
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(context, model, x, y).Invoke
+        Return Launch(Context, Model, x, y).Invoke
     End Function
 End Class
