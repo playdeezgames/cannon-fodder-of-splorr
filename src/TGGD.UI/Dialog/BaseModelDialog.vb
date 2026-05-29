@@ -1,4 +1,6 @@
-﻿Public MustInherit Class BaseModelDialog(Of TContext As IHostContext, TModel)
+﻿Imports TGGD.Model
+
+Public MustInherit Class BaseModelDialog(Of TContext As IHostContext, TModel As IModel)
     Inherits BaseDialog(Of TContext)
 
     Protected ReadOnly Model As TModel

@@ -1,4 +1,6 @@
-﻿Public MustInherit Class ExitableModelDialog(Of TContext As IHostContext, TModel)
+﻿Imports TGGD.Model
+
+Public MustInherit Class ExitableModelDialog(Of TContext As IHostContext, TModel As IModel)
     Inherits BaseModelDialog(Of TContext, TModel)
 
     Protected ReadOnly EditDialog As Func(Of IDialog)
