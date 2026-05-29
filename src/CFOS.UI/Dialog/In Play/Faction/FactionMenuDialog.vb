@@ -2,14 +2,14 @@
 Imports TGGD.UI
 
 Friend Class FactionMenuDialog
-    Inherits BaseModelDialog(Of IWorldModel)
+    Inherits ExitableModelDialog(Of IWorldModel)
 
-    Private Sub New(context As IHostContext, model As IWorldModel)
-        MyBase.New(context, model)
+    Private Sub New(context As IHostContext, model As IWorldModel, exitDialog As Func(Of IDialog))
+        MyBase.New(context, model, exitDialog)
     End Sub
 
-    Friend Shared Function Launch(context As IHostContext, model As IWorldModel) As Func(Of IDialog)
-        Return Function() New FactionMenuDialog(context, model)
+    Friend Shared Function Launch(context As IHostContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
+        Return Function() New FactionMenuDialog(context, model, exitDialog)
     End Function
 
     Public Overrides Function Run() As IDialog
@@ -25,6 +25,6 @@ Friend Class FactionMenuDialog
 
     Private Function RenameFaction() As IDialog
         model.FactionName = context.ReadString("New Faction Name:", model.FactionName)
-        Return Launch(context, model).Invoke()
+        Return Launch(context, model, exitDialog).Invoke()
     End Function
 End Class

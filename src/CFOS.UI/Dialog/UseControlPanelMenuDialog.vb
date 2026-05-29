@@ -19,6 +19,7 @@ Friend Class UseControlPanelMenuDialog
             DialogChoice.Create(exitDialog IsNot Nothing, "Never Mind", exitDialog),
             DialogChoice.CreateEnabled(
                 "Units...",
-                FactionUnitsMenuDialog.Launch(context, model.FactionModel)))
+                FactionUnitsMenuDialog.Launch(context, model.FactionModel, Launch(context, model, exitDialog))),
+            DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model.FactionModel.WorldModel, Launch(context, model, exitDialog))))
     End Function
 End Class

@@ -19,8 +19,8 @@ Friend Class StagingMenuDialog
         context.WriteLine($"Faction Units: {faction.UnitCount}")
         Return context.Choose(
             "Now What?",
-            DialogChoice.CreateEnabled("Units...", FactionUnitsMenuDialog.Launch(context, faction)),
-            DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model)),
+            DialogChoice.CreateEnabled("Units...", FactionUnitsMenuDialog.Launch(context, faction, Launch(context, model))),
+            DialogChoice.CreateEnabled("Faction...", FactionMenuDialog.Launch(context, model, Launch(context, model))),
             DialogChoice.CreateEnabled("Game Menu", GameMenuDialog.Launch(context, model)))
     End Function
 End Class

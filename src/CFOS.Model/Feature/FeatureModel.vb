@@ -19,7 +19,7 @@ Friend Class FeatureModel
 
     Public ReadOnly Property FactionModel As IFactionModel Implements IFeatureModel.FactionModel
         Get
-            Throw New NotImplementedException()
+            Return CFOS.Model.FactionModel.Create(feature.World.Player)
         End Get
     End Property
 

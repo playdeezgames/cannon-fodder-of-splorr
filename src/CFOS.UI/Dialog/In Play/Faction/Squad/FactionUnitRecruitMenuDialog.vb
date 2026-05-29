@@ -21,7 +21,7 @@ Friend Class FactionUnitRecruitMenuDialog
                 x.UnitTypeName,
                 FactionUnitRecruitUnitTypeMenuDialog.Launch(context, model, x)))
         Return context.Choose("Recruit Whom:",
-            {DialogChoice.CreateEnabled("Never Mind", FactionUnitsMenuDialog.Launch(context, model))}.
+            {DialogChoice.CreateEnabled("Never Mind", FactionUnitsMenuDialog.Launch(context, model, Launch(context, model)))}.
             Concat(choices).ToArray)
     End Function
 End Class

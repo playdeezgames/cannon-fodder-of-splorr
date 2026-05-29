@@ -17,6 +17,6 @@ Friend Class FactionUnitRecruitUnitTypeMenuDialog
 
     Public Overrides Function Run() As IDialog
         model.AddUnit(unitTypeModel)
-        Return FactionUnitsMenuDialog.Launch(context, model).Invoke()
+        Return FactionUnitsMenuDialog.Launch(context, model, Launch(context, model, unitTypeModel)).Invoke()
     End Function
 End Class

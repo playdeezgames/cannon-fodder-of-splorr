@@ -16,6 +16,6 @@ Friend Class FactionUnitDialog
         context.WriteLine($"Unit: {model.GetName()}")
         Return context.Choose(
             "Now What?",
-            DialogChoice.CreateEnabled("Never Mind", FactionUnitsMenuDialog.Launch(context, model.FactionModel)))
+            DialogChoice.CreateEnabled("Never Mind", FactionUnitsMenuDialog.Launch(context, model.FactionModel, Launch(context, model))))
     End Function
 End Class
