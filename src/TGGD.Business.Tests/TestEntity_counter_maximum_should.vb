@@ -28,4 +28,12 @@ Public Class TestEntity_counter_maximum_should
         entityData.CounterMaximums.Single.Key.ShouldBe(Keys.ONE)
         entityData.CounterMaximums.Single.Value.ShouldBe(COUNTER_MAXIMUM)
     End Sub
+    <Fact>
+    Sub get_counter_maximum()
+        Dim entityData As New Data.EntityData
+        entityData.CounterMaximums(Keys.ONE) = COUNTER_MAXIMUM
+        Dim sut = TestEntity.Create(entityData)
+        Dim actual = sut.GetCounterMaximum(Keys.ONE)
+        actual.ShouldBe(COUNTER_MAXIMUM)
+    End Sub
 End Class

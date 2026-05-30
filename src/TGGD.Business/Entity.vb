@@ -42,9 +42,10 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     End Function
 
     Public Function GetCounterMaximum(counterId As String) As Integer Implements IEntity.GetCounterMaximum
-        If EntityData IsNot Nothing Then
-            Return Integer.MaxValue
+        Dim result As Integer
+        If EntityData.CounterMaximums.TryGetValue(counterId, result) Then
+            Return result
         End If
-        Throw New NullReferenceException()
+        Return Integer.MaxValue
     End Function
 End Class
