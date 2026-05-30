@@ -6,6 +6,7 @@
   </Folder>
   <Folder Name="/Data/">
     <Project Path="CFOS.Data/CFOS.Data.vbproj" />
+    <Project Path="GMN.Data/GMN.Data.vbproj" Id="ff91a35c-4464-4561-9b86-402e05055601" />
     <Project Path="TGGD.Data/TGGD.Data.vbproj" />
   </Folder>
   <Folder Name="/Model/">
