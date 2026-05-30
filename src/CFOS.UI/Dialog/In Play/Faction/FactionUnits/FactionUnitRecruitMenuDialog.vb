@@ -19,7 +19,7 @@ Friend Class FactionUnitRecruitMenuDialog
             AvailableUnitTypes.
             Select(Function(x) DialogChoice.CreateEnabled(
                 x.UnitTypeName,
-                FactionUnitRecruitUnitTypeMenuDialog.Launch(Context, Model, x, EditDialog)))
+                FactionUnitRecruitUnitTypeMenuDialog.Launch(Context, Model, x, ExitDialog)))
         Return Context.Choose("Recruit Whom:",
             {
                 ExitChoice
@@ -28,6 +28,6 @@ Friend Class FactionUnitRecruitMenuDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(Context, Model, EditDialog).Invoke
+        Return Launch(Context, Model, ExitDialog).Invoke
     End Function
 End Class

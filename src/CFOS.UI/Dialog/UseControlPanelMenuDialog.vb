@@ -14,18 +14,20 @@ Friend Class UseControlPanelMenuDialog
 
     Public Overrides Function Run() As IDialog
         Context.WriteLine("Yer using the control panel!")
+        Dim faction = Model.FactionModel
+        Dim world = faction.WorldModel
         Return Context.Choose(
             "Now What?",
             ExitChoice,
             DialogChoice.CreateEnabled(
                 "Units...",
-                FactionUnitsMenuDialog.Launch(Context, Model.FactionModel, AddressOf Relaunch)),
+                FactionUnitsMenuDialog.Launch(Context, faction, AddressOf Relaunch)),
             DialogChoice.CreateEnabled(
                 "Faction...",
-                FactionMenuDialog.Launch(Context, Model.FactionModel.WorldModel, AddressOf Relaunch)))
+                FactionMenuDialog.Launch(Context, world, AddressOf Relaunch)))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(Context, Model, EditDialog).Invoke
+        Return Launch(Context, Model, ExitDialog).Invoke
     End Function
 End Class

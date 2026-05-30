@@ -26,6 +26,6 @@ Friend Class GameMenuDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(Context, Model, EditDialog).Invoke()
+        Return Launch(Context, Model, ExitDialog).Invoke()
     End Function
 End Class

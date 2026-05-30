@@ -17,10 +17,10 @@ Friend Class FactionUnitRecruitUnitTypeMenuDialog
 
     Public Overrides Function Run() As IDialog
         Model.AddUnit(unitTypeModel)
-        Return EditDialog.Invoke()
+        Return ExitDialog.Invoke()
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(Context, Model, unitTypeModel, EditDialog).Invoke
+        Return Launch(Context, Model, unitTypeModel, ExitDialog).Invoke
     End Function
 End Class

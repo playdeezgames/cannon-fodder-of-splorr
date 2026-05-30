@@ -9,6 +9,7 @@ Friend Class CradleLocationMenuDialog
     End Sub
 
     Public Overrides Function Run() As IDialog
+        Context.Clear()
         Context.WriteLine($"Location: ({Model.Column}, {Model.Row})")
         Context.WriteLine($"Location Type: {Model.LocationTypeModel.LocationTypeName}")
         Context.WriteLine($"Description: {Model.LocationTypeModel.LocationTypeDescription}")
@@ -23,7 +24,9 @@ Friend Class CradleLocationMenuDialog
         Dim choices =
             {
                 ExitChoice
-            }.Concat(feature.GetInterations(Context, AddressOf Relaunch))
+            }.
+            Concat(feature.GetInterations(Context, AddressOf Relaunch)).
+            Concat(unit.GetInterations(Context, AddressOf Relaunch))
         Return Context.Choose("Now What?", choices.ToArray)
     End Function
 
@@ -32,6 +35,6 @@ Friend Class CradleLocationMenuDialog
     End Function
 
     Protected Overrides Function Relaunch() As IDialog
-        Return Launch(Context, Model, EditDialog).Invoke
+        Return Launch(Context, Model, ExitDialog).Invoke
     End Function
 End Class

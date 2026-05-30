@@ -3,18 +3,18 @@
 Public MustInherit Class ExitableModelDialog(Of TContext As IHostContext, TModel As IModel)
     Inherits BaseModelDialog(Of TContext, TModel)
 
-    Protected ReadOnly EditDialog As Func(Of IDialog)
+    Protected ReadOnly ExitDialog As Func(Of IDialog)
 
     Protected Sub New(
                      context As TContext,
                      model As TModel,
                      exitDialog As Func(Of IDialog))
         MyBase.New(context, model)
-        Me.EditDialog = exitDialog
+        Me.ExitDialog = exitDialog
     End Sub
     Protected ReadOnly Property ExitChoice As IDialogChoice
         Get
-            Return DialogChoice.Create(EditDialog IsNot Nothing, GetExitText(), EditDialog)
+            Return DialogChoice.Create(ExitDialog IsNot Nothing, GetExitText(), ExitDialog)
         End Get
     End Property
 

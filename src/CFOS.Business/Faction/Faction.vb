@@ -23,6 +23,11 @@ Friend Class Faction
         location.Unit = unit
         Return unit
     End Function
+
+    Public Sub RemoveUnit(unit As IUnit) Implements IFaction.RemoveUnit
+        EntityData.UnitIds.Remove(unit.UnitId)
+    End Sub
+
     Public ReadOnly Property FactionId As Guid Implements IFaction.FactionId
 
     Protected Overrides ReadOnly Property EntityData As FactionData

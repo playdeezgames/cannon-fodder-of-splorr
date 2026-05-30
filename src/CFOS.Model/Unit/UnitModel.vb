@@ -27,6 +27,16 @@ Friend Class UnitModel
         End Get
     End Property
 
+    Public ReadOnly Property CanLiquefy As Boolean Implements IUnitModel.CanLiquefy
+        Get
+            Return True
+        End Get
+    End Property
+
+    Public Sub Liquefy() Implements IUnitModel.Liquefy
+        Entity.Disband()
+    End Sub
+
     Friend Shared Function Create(unit As IUnit) As IUnitModel
         Return New UnitModel(unit)
     End Function

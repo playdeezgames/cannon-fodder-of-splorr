@@ -11,15 +11,15 @@ Friend Class UseControlPanelInteraction
         Return New UseControlPanelInteraction
     End Function
 
-    Protected Overrides Function MakeDialog(context As IHostContext, feature As IFeatureModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
-        Return UseControlPanelMenuDialog.Launch(context, feature, exitDialog)
+    Protected Overrides Function MakeDialog(context As IHostContext, model As IFeatureModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
+        Return UseControlPanelMenuDialog.Launch(context, model, exitDialog)
     End Function
 
-    Protected Overrides Function MakeName(feature As IFeatureModel) As String
+    Protected Overrides Function MakeName(model As IFeatureModel) As String
         Return "Use Control Panel"
     End Function
 
-    Protected Overrides Function CanInteract(feature As IFeatureModel) As Boolean
-        Return feature.FeatureTypeModel.IsControlPanel
+    Protected Overrides Function CanInteract(model As IFeatureModel) As Boolean
+        Return model.FeatureTypeModel.IsControlPanel
     End Function
 End Class

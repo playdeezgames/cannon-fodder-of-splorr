@@ -17,11 +17,23 @@ Friend Class Unit
         End Get
     End Property
 
+    Public ReadOnly Property Location As ILocation Implements IUnit.Location
+        Get
+            Return CFOS.Business.Location.Create(worldData, EntityData.LocationId)
+        End Get
+    End Property
+
     Protected Overrides ReadOnly Property EntityData As UnitData
         Get
             Return worldData.Units(UnitId)
         End Get
     End Property
+
+    Public Sub Disband() Implements IUnit.Disband
+        Me.Faction.RemoveUnit(Me)
+        Me.Location.Unit = Nothing
+        worldData.Units.Remove(UnitId)
+    End Sub
 
     Friend Shared Function Create(worldData As WorldData, unitId As Guid) As IUnit
         Return New Unit(worldData, unitId)

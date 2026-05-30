@@ -5,4 +5,5 @@
     ReadOnly Property UnitCount As Integer
     Property Cradle As IArea
     ReadOnly Property Units As IEnumerable(Of IUnit)
+    Sub RemoveUnit(unit As IUnit)
 End Interface

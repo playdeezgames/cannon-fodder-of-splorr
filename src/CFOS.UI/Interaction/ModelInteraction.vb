@@ -8,7 +8,7 @@ Friend MustInherit Class ModelInteraction(Of TModel)
             MakeDialog(context, feature, exitDialog))
     End Function
 
-    Protected MustOverride Function MakeDialog(context As IHostContext, feature As TModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
-    Protected MustOverride Function MakeName(feature As TModel) As String
-    Protected MustOverride Function CanInteract(feature As TModel) As Boolean
+    Protected MustOverride Function MakeDialog(context As IHostContext, model As TModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
+    Protected MustOverride Function MakeName(model As TModel) As String
+    Protected MustOverride Function CanInteract(model As TModel) As Boolean
 End Class

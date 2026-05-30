@@ -5,4 +5,6 @@ Public Interface IUnitModel
     ReadOnly Property UnitTypeModel As IUnitTypeModel
     ReadOnly Property FactionModel As IFactionModel
     ReadOnly Property SerialNumber As Integer
+    ReadOnly Property CanLiquefy As Boolean
+    Sub Liquefy()
 End Interface
