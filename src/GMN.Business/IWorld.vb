@@ -1,3 +1,5 @@
-﻿Public Interface IWorld
+﻿Imports TGGD.Business
 
+Public Interface IWorld
+    Inherits IEntity
 End Interface

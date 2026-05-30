@@ -12,6 +12,7 @@
   </Folder>
   <Folder Name="/Model/">
     <Project Path="CFOS.Model/CFOS.Model.vbproj" />
+    <Project Path="GMN.Model/GMN.Model.vbproj" Id="fead04a3-178c-49e2-acd2-8fc0f44caea8" />
     <Project Path="TGGD.Model/TGGD.Model.vbproj" />
   </Folder>
   <Folder Name="/Solution Items/" />
