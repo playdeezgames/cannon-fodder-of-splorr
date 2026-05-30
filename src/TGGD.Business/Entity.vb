@@ -38,7 +38,10 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     End Function
 
     Public Function GetCounter(counterId As String) As Integer Implements IEntity.GetCounter
-        Return Math.Min(GetCounterMaximum(counterId), EntityData.Counters(counterId))
+        Return Math.Clamp(
+            EntityData.Counters(counterId),
+            GetCounterMinimum(counterId),
+            GetCounterMaximum(counterId))
     End Function
 
     Public Function HasTag(tagId As String) As Boolean Implements IEntity.HasTag
@@ -54,6 +57,10 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     End Function
 
     Public Function GetCounterMinimum(counterId As String) As Integer Implements IEntity.GetCounterMinimum
-        Throw New NullReferenceException()
+        Dim result As Integer
+        If EntityData.CounterMinimums.TryGetValue(counterId, result) Then
+            Return result
+        End If
+        Return Integer.MinValue
     End Function
 End Class
