@@ -13,8 +13,8 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         EntityData.Metadatas(metadataId) = metadataValue
     End Sub
 
-    Public Sub SetStatistic(statisticId As String, statisticValue As Integer) Implements IEntity.SetStatistic
-        EntityData.Statistics(statisticId) = statisticValue
+    Public Sub SetCounter(counterId As String, counterValue As Integer) Implements IEntity.SetCounter
+        EntityData.Counters(counterId) = counterValue
     End Sub
 
     Public Sub SetTag(tagId As String, tagValue As Boolean) Implements IEntity.SetTag
@@ -29,8 +29,8 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         Return EntityData.Metadatas(metadataId)
     End Function
 
-    Public Function GetStatistic(statisticId As String) As Integer Implements IEntity.GetStatistic
-        Return EntityData.Statistics(statisticId)
+    Public Function GetCounter(counterId As String) As Integer Implements IEntity.GetCounter
+        Return EntityData.Counters(counterId)
     End Function
 
     Public Function HasTag(tagId As String) As Boolean Implements IEntity.HasTag

@@ -12,10 +12,10 @@ Friend Module UnitExtensions
     End Sub
     <Extension>
     Friend Sub SetSerialNumber(unit As IUnit, serialNumber As Integer)
-        unit.SetStatistic(Statistics.SERIAL_NUMBER, serialNumber)
+        unit.SetCounter(Counters.SERIAL_NUMBER, serialNumber)
     End Sub
     <Extension>
     Friend Function GetSerialNumber(unit As IUnit) As Integer
-        Return unit.GetStatistic(Statistics.SERIAL_NUMBER)
+        Return unit.GetCounter(Counters.SERIAL_NUMBER)
     End Function
 End Module
