@@ -9,9 +9,7 @@ Friend Class TitleDialog
 
     Public Overrides Function Run() As IDialog
         Context.WriteLine("Welcome to:")
-        Context.PushColor("fuchsia")
-        Context.WriteFiglet("Cannon Fodder of SPLORR!!")
-        Context.PopColor()
+        Context.WriteFiglet("Cannon Fodder of SPLORR!!", "fuchsia")
         Context.WriteLine("A production of TheGrumpyGameDev")
         Context.Pause()
         Return MainMenuDialog.Launch(Context).Invoke()

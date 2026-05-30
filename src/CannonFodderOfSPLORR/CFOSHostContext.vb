@@ -5,12 +5,8 @@ Friend Class CFOSHostContext
     Implements IHostContext
     Private ReadOnly colorStack As New Stack(Of String)
 
-    Public Sub WriteLine(text As String) Implements IHostContext.WriteLine
-        If colorStack.Count <> 0 Then
-            AnsiConsole.MarkupLine($"[{colorStack.Peek}]{text}[/]")
-        Else
-            AnsiConsole.MarkupLine(text)
-        End If
+    Public Sub WriteLine(text As String, Optional color As String = Nothing) Implements IHostContext.WriteLine
+        AnsiConsole.MarkupLine($"{If(color IsNot Nothing, $"[{color}]", String.Empty)}{text}{If(color IsNot Nothing, $"[/]", String.Empty)}")
     End Sub
 
     Public Sub Pause() Implements IHostContext.Pause
@@ -26,24 +22,15 @@ Friend Class CFOSHostContext
         AnsiConsole.Clear()
     End Sub
 
-    Public Sub WriteString(text As String) Implements IHostContext.WriteString
-        If colorStack.Count <> 0 Then
-            AnsiConsole.Markup($"[{colorStack.Peek}]{text}[/]")
-        Else
-            AnsiConsole.Markup(text)
-        End If
+    Public Sub WriteString(text As String, Optional color As String = Nothing) Implements IHostContext.WriteString
+        AnsiConsole.Markup($"{If(color IsNot Nothing, $"[{color}]", String.Empty)}{text}{If(color IsNot Nothing, $"[/]", String.Empty)}")
     End Sub
 
-    Public Sub PushColor(color As String) Implements IHostContext.PushColor
-        colorStack.Push(color)
-    End Sub
-
-    Public Sub PopColor() Implements IHostContext.PopColor
-        colorStack.Pop()
-    End Sub
-
-    Public Sub WriteFiglet(text As String) Implements IHostContext.WriteFiglet
+    Public Sub WriteFiglet(text As String, Optional color As String = Nothing) Implements IHostContext.WriteFiglet
         Dim figlet = New FigletText(text)
+        If color IsNot Nothing Then
+            figlet.Color = Spectre.Console.Color.FromName(color)
+        End If
         AnsiConsole.Write(figlet)
     End Sub
 
