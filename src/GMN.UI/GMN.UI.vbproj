@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>CFOS.Business</RootNamespace>
+    <RootNamespace>GMN.UI</RootNamespace>
     <TargetFramework>net10.0</TargetFramework>
     <OptionStrict>On</OptionStrict>
   </PropertyGroup>
@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CFOS.Data\CFOS.Data.vbproj" />
-    <ProjectReference Include="..\TGGD.Business\TGGD.Business.vbproj" />
+    <ProjectReference Include="..\GMN.Model\GMN.Model.vbproj" />
+    <ProjectReference Include="..\TGGD.UI\TGGD.UI.vbproj" />
   </ItemGroup>
 
 </Project>

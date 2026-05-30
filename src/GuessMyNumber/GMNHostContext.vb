@@ -1,9 +1,8 @@
 ﻿Imports Spectre.Console
 Imports TGGD.UI
 
-Friend Class CFOSHostContext
+Friend Class GMNHostContext
     Implements IHostContext
-    Private ReadOnly colorStack As New Stack(Of String)
 
     Public Sub WriteLine(text As String, Optional color As String = Nothing) Implements IHostContext.WriteLine
         AnsiConsole.MarkupLine($"{If(color IsNot Nothing, $"[{color}]", String.Empty)}{text}{If(color IsNot Nothing, $"[/]", String.Empty)}")
@@ -37,7 +36,7 @@ Friend Class CFOSHostContext
     Public Function Choose(title As String, ParamArray choices As IDialogChoice()) As IDialog Implements IHostContext.Choose
         Dim prompt As New SelectionPrompt(Of IDialogChoice) With
             {
-                .Title = $"[olive]{title}[/]",
+                .title = $"[olive]{title}[/]",
                 .Converter = Function(x) x.Text
             }
         prompt.AddChoices(choices.Where(Function(x) x.Enabled))
