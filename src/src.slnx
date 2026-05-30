@@ -1,21 +1,31 @@
 <Solution>
   <Folder Name="/Business/">
-    <Project Path="CFOS.Business/CFOS.Business.vbproj" />
+    <Project Path="CFOS.Business/CFOS.Business.vbproj">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
     <Project Path="TGGD.Business.Tests/TGGD.Business.Tests.vbproj" Id="ddbf9509-71d9-4bbf-95ee-fcd5cf5b5e97" />
     <Project Path="TGGD.Business/TGGD.Business.vbproj" />
   </Folder>
   <Folder Name="/Data/">
-    <Project Path="CFOS.Data/CFOS.Data.vbproj" />
+    <Project Path="CFOS.Data/CFOS.Data.vbproj">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
     <Project Path="TGGD.Data/TGGD.Data.vbproj" />
   </Folder>
   <Folder Name="/Model/">
-    <Project Path="CFOS.Model/CFOS.Model.vbproj" />
+    <Project Path="CFOS.Model/CFOS.Model.vbproj">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
     <Project Path="TGGD.Model/TGGD.Model.vbproj" />
   </Folder>
   <Folder Name="/Solution Items/" />
   <Folder Name="/UI/">
-    <Project Path="CFOS.UI/CFOS.UI.vbproj" />
+    <Project Path="CFOS.UI/CFOS.UI.vbproj">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
     <Project Path="TGGD.UI/TGGD.UI.vbproj" />
   </Folder>
-  <Project Path="CannonFodderOfSPLORR/CannonFodderOfSPLORR.vbproj" />
+  <Project Path="CannonFodderOfSPLORR/CannonFodderOfSPLORR.vbproj">
+    <Build Solution="Debug|*" Project="false" />
+  </Project>
 </Solution>
