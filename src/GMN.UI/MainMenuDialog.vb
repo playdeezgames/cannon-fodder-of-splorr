@@ -21,8 +21,4 @@ Friend Class MainMenuDialog
     Friend Shared Function Launch(context As IHostContext, model As IWorldModel, exitDialog As Func(Of IDialog)) As Func(Of IDialog)
         Return Function() New MainMenuDialog(context, model, exitDialog)
     End Function
-
-    Protected Overrides Function GetExitText() As String
-        Return "Quit"
-    End Function
 End Class

@@ -14,6 +14,10 @@ Public Class GMNHost
 
     Public Overrides Function Run() As IDialog
         Dim model As IWorldModel = WorldModel.Create(GMN.Business.World.Create(New Data.GMNData))
-        Return MainMenuDialog.Launch(Context, model, Nothing).Invoke()
+        Dim dialog As IDialog = MainMenuDialog.Launch(Context, model, Function() Nothing).Invoke()
+        Do While dialog IsNot Nothing
+            dialog = dialog.Run()
+        Loop
+        Return dialog
     End Function
 End Class
