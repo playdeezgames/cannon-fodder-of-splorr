@@ -7,18 +7,18 @@ Public Class TestEntity_counter_minimum_should
         Dim sut = TestEntity.Create(Nothing)
         Should.Throw(Of NullReferenceException)(Sub() sut.GetCounterMinimum(Keys.ONE))
     End Sub
-    '<Fact>
-    'Sub throw_exception_when_writing_to_null_entity_data()
-    '    Dim sut = TestEntity.Create(Nothing)
-    '    Should.Throw(Of NullReferenceException)(Sub() sut.SetCounterMaximum(Keys.ONE, COUNTER_MAXIMUM))
-    'End Sub
+    <Fact>
+    Sub throw_exception_when_writing_to_null_entity_data()
+        Dim sut = TestEntity.Create(Nothing)
+        Should.Throw(Of NullReferenceException)(Sub() sut.SetCounterMinimum(Keys.ONE, COUNTER_MINIMUM))
+    End Sub
     '<Fact>
     'Sub return_maximum_integer_when_reading_invalid_key()
     '    Dim sut = TestEntity.Create(New Data.EntityData)
     '    Dim actual = sut.GetCounterMaximum(Keys.ONE)
     '    actual.ShouldBe(Integer.MaxValue)
     'End Sub
-    'Const COUNTER_MAXIMUM = 69
+    Const COUNTER_MINIMUM = 69
     '<Fact>
     'Sub set_counter_maximum()
     '    Dim entityData As New Data.EntityData

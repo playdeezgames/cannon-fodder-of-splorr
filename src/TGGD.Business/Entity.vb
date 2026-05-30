@@ -29,6 +29,10 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         EntityData.CounterMaximums(counterId) = counterMaximum
     End Sub
 
+    Public Sub SetCounterMinimum(counterId As String, counterMinimum As Integer) Implements IEntity.SetCounterMinimum
+        EntityData.CounterMinimums(counterId) = counterMinimum
+    End Sub
+
     Public Function GetMetadata(metadataId As String) As String Implements IEntity.GetMetadata
         Return EntityData.Metadatas(metadataId)
     End Function

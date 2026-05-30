@@ -9,4 +9,5 @@
     Function GetCounterMaximum(counterId As String) As Integer
     Sub SetCounterMaximum(counterId As String, counterMaximum As Integer)
     Function GetCounterMinimum(counterId As String) As Integer
+    Sub SetCounterMinimum(counterId As String, counterMinimum As Integer)
 End Interface
