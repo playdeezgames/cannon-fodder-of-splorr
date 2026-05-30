@@ -6,4 +6,7 @@
     Function Choose(title As String, ParamArray choices As IDialogChoice()) As IDialog
     Function ReadString(text As String, Optional defaultValue As String = Nothing) As String
     Function ReadKey() As String
+    Sub PushColor(color As String)
+    Sub PopColor()
+    Sub WriteFiglet(text As String)
 End Interface

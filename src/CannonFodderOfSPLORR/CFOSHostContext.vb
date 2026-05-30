@@ -3,9 +3,14 @@ Imports TGGD.UI
 
 Friend Class CFOSHostContext
     Implements IHostContext
+    Private ReadOnly colorStack As New Stack(Of String)
 
     Public Sub WriteLine(text As String) Implements IHostContext.WriteLine
-        AnsiConsole.WriteLine(text)
+        If colorStack.Count <> 0 Then
+            AnsiConsole.MarkupLine($"[{colorStack.Peek}]{text}[/]")
+        Else
+            AnsiConsole.MarkupLine(text)
+        End If
     End Sub
 
     Public Sub Pause() Implements IHostContext.Pause
@@ -22,7 +27,24 @@ Friend Class CFOSHostContext
     End Sub
 
     Public Sub WriteString(text As String) Implements IHostContext.WriteString
-        AnsiConsole.Markup(text)
+        If colorStack.Count <> 0 Then
+            AnsiConsole.Markup($"[{colorStack.Peek}]{text}[/]")
+        Else
+            AnsiConsole.Markup(text)
+        End If
+    End Sub
+
+    Public Sub PushColor(color As String) Implements IHostContext.PushColor
+        colorStack.Push(color)
+    End Sub
+
+    Public Sub PopColor() Implements IHostContext.PopColor
+        colorStack.Pop()
+    End Sub
+
+    Public Sub WriteFiglet(text As String) Implements IHostContext.WriteFiglet
+        Dim figlet = New FigletText(text)
+        AnsiConsole.Write(figlet)
     End Sub
 
     Public Function Choose(title As String, ParamArray choices As IDialogChoice()) As IDialog Implements IHostContext.Choose
