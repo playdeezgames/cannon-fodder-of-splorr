@@ -1,4 +1,5 @@
 ﻿Imports Shouldly
+Imports TGGD.Data
 Imports Xunit
 
 Public Class TestEntity_counter_maximum_should
@@ -34,6 +35,14 @@ Public Class TestEntity_counter_maximum_should
         entityData.CounterMaximums(Keys.ONE) = COUNTER_MAXIMUM
         Dim sut = TestEntity.Create(entityData)
         Dim actual = sut.GetCounterMaximum(Keys.ONE)
+        actual.ShouldBe(COUNTER_MAXIMUM)
+    End Sub
+    <Fact>
+    Sub affect_counter_value()
+        Dim sut = TestEntity.Create(New Data.EntityData)
+        sut.SetCounter(Keys.ONE, COUNTER_MAXIMUM + 1)
+        sut.SetCounterMaximum(Keys.ONE, COUNTER_MAXIMUM)
+        Dim actual = sut.GetCounter(Keys.ONE)
         actual.ShouldBe(COUNTER_MAXIMUM)
     End Sub
 End Class
