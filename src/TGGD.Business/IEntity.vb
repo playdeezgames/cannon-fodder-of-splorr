@@ -8,4 +8,5 @@
     Sub SetTag(tagId As String, tagValue As Boolean)
     Function GetCounterMaximum(counterId As String) As Integer
     Sub SetCounterMaximum(counterId As String, counterMaximum As Integer)
+    Function GetCounterMinimum(counterId As String) As Integer
 End Interface

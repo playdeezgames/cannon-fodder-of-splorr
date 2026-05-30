@@ -48,4 +48,8 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         End If
         Return Integer.MaxValue
     End Function
+
+    Public Function GetCounterMinimum(counterId As String) As Integer Implements IEntity.GetCounterMinimum
+        Throw New NullReferenceException()
+    End Function
 End Class
