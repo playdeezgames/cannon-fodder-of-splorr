@@ -1,4 +1,5 @@
-﻿Imports TGGD.UI
+﻿Imports GMN.Model
+Imports TGGD.UI
 
 Public Class GMNHost
     Inherits Host
@@ -12,8 +13,7 @@ Public Class GMNHost
     End Sub
 
     Public Overrides Function Run() As IDialog
-        Context.WriteLine("Hello, world!")
-        Context.Pause()
-        Return Nothing
+        Dim model As IWorldModel = WorldModel.Create(GMN.Business.World.Create(New Data.GMNData))
+        Return MainMenuDialog.Launch(Context, model, Nothing).Invoke()
     End Function
 End Class
