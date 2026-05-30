@@ -36,4 +36,8 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     Public Function HasTag(tagId As String) As Boolean Implements IEntity.HasTag
         Return EntityData.Tags.Contains(tagId)
     End Function
+
+    Public Function GetCounterMaximum(counterId As String) As Integer Implements IEntity.GetCounterMaximum
+        Throw New NullReferenceException()
+    End Function
 End Class

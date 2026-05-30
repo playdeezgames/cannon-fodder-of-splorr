@@ -6,4 +6,5 @@
     Function GetCounter(counterId As String) As Integer
     Function HasTag(tagId As String) As Boolean
     Sub SetTag(tagId As String, tagValue As Boolean)
+    Function GetCounterMaximum(counterId As String) As Integer
 End Interface
