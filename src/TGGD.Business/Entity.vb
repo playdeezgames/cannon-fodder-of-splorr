@@ -25,6 +25,10 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         End If
     End Sub
 
+    Public Sub SetCounterMaximum(counterId As String, counterMaximum As Integer) Implements IEntity.SetCounterMaximum
+        EntityData.CounterMaximums(counterId) = counterMaximum
+    End Sub
+
     Public Function GetMetadata(metadataId As String) As String Implements IEntity.GetMetadata
         Return EntityData.Metadatas(metadataId)
     End Function
