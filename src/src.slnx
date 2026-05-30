@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Business/">
     <Project Path="CFOS.Business/CFOS.Business.vbproj" />
+    <Project Path="GMN.Business/GMN.Business.vbproj" Id="50d39715-021f-444f-985e-2b2a0ce2e4f7" />
     <Project Path="TGGD.Business.Tests/TGGD.Business.Tests.vbproj" Id="ddbf9509-71d9-4bbf-95ee-fcd5cf5b5e97" />
     <Project Path="TGGD.Business/TGGD.Business.vbproj" />
   </Folder>
