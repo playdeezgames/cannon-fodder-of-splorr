@@ -4,5 +4,6 @@
     Sub SetMetadata(metadataId As String, metadataValue As String)
     Sub SetStatistic(statisticId As String, statisticValue As Integer)
     Function GetStatistic(statisticId As String) As Integer
-    Function GetFlag(flagId As String) As Boolean
+    Function HasTag(tagId As String) As Boolean
+    Sub SetTag(tagId As String, tagValue As Boolean)
 End Interface

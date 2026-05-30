@@ -17,6 +17,14 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         EntityData.Statistics(statisticId) = statisticValue
     End Sub
 
+    Public Sub SetTag(tagId As String, tagValue As Boolean) Implements IEntity.SetTag
+        If tagValue Then
+            EntityData.Tags.Add(tagId)
+        Else
+            EntityData.Tags.Remove(tagId)
+        End If
+    End Sub
+
     Public Function GetMetadata(metadataId As String) As String Implements IEntity.GetMetadata
         Return EntityData.Metadatas(metadataId)
     End Function
@@ -25,7 +33,7 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         Return EntityData.Statistics(statisticId)
     End Function
 
-    Public Function GetFlag(flagId As String) As Boolean Implements IEntity.GetFlag
-        Return EntityData.Flags.Contains(flagId)
+    Public Function HasTag(tagId As String) As Boolean Implements IEntity.HasTag
+        Return EntityData.Tags.Contains(tagId)
     End Function
 End Class
