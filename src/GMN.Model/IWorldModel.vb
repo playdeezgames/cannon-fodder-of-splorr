@@ -12,5 +12,6 @@ Public Interface IWorldModel
     ReadOnly Property IsGuessLow As Boolean
     Sub MakeGuess(guess As Integer)
     Sub FinishGame()
+    Sub ResetStatistics()
     ReadOnly Property GuessCount As Integer
 End Interface

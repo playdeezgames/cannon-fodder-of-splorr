@@ -23,6 +23,17 @@ Friend Class MainMenuDialog
                     Model,
                     AddressOf Relaunch)),
             DialogChoice.CreateEnabled(
+                "Reset Statistics",
+                ConfirmDialog(Of IHostContext).
+                    Launch(
+                        Context,
+                        "[red]Are you sure you want to reset statistics?[/]",
+                        ResetStatisticsDialog.Launch(
+                            Context,
+                            Model,
+                            AddressOf Relaunch),
+                        AddressOf Relaunch)),
+            DialogChoice.CreateEnabled(
                 "Quit",
                 ConfirmDialog(Of IHostContext).
                     Launch(

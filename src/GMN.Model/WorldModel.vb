@@ -81,6 +81,12 @@ Public Class WorldModel
         Entity.Save(Grimoire.SAVE_FILE_NAME)
     End Sub
 
+    Public Sub ResetStatistics() Implements IWorldModel.ResetStatistics
+        Entity.SetCounter(Counters.GAMES_PLAYED, 0)
+        Entity.SetCounter(Counters.TOTAL_SCORE, 0)
+        Entity.Save(Grimoire.SAVE_FILE_NAME)
+    End Sub
+
     Public Shared Function Create() As IWorldModel
         Dim world As IWorld
         Try
