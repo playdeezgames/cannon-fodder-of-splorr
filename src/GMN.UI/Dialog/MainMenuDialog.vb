@@ -9,6 +9,8 @@ Friend Class MainMenuDialog
     End Sub
 
     Public Overrides Function Run() As IDialog
+        Context.Clear()
+        Context.WriteLine($"Games Played: {Model.GamesPlayed}")
         Return Context.Choose(
             "Main Menu:",
             DialogChoice.CreateEnabled(

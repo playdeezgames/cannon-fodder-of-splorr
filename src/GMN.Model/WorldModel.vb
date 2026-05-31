@@ -9,6 +9,12 @@ Public Class WorldModel
         MyBase.New(entity)
     End Sub
 
+    Public ReadOnly Property GamesPlayed As Integer Implements IWorldModel.GamesPlayed
+        Get
+            Return Entity.GetCounter(Counters.GAMES_PLAYED)
+        End Get
+    End Property
+
     Public Shared Function Create() As IWorldModel
         Dim world As IWorld
         Try
