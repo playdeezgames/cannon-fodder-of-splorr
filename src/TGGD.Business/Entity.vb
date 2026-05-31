@@ -73,6 +73,7 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
     End Function
 
     Public Function ChangeCounter(counterId As String, delta As Integer) As Integer Implements IEntity.ChangeCounter
-        Throw New NotImplementedException()
+        SetCounter(counterId, GetCounter(counterId) + delta)
+        Return GetCounter(counterId)
     End Function
 End Class

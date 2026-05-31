@@ -49,4 +49,18 @@ Public Class TestEntity_counter_should
         Dim actual = sut.TryGetCounter(Keys.ONE)
         actual.ShouldBe(COUNTER_VALUE)
     End Sub
+    <Fact>
+    Sub change_counter_throws_when_invalid_key()
+        Dim entityData As New EntityData
+        Dim sut = TestEntity.Create(entityData)
+        Should.Throw(Of KeyNotFoundException)(Sub() sut.ChangeCounter(Keys.ONE, COUNTER_VALUE))
+    End Sub
+    <Fact>
+    Sub change_counter_adds_to_current_counter_value()
+        Dim entityData As New EntityData
+        Dim sut = TestEntity.Create(entityData)
+        sut.SetCounter(Keys.ONE, 0)
+        Dim actual = sut.ChangeCounter(Keys.ONE, COUNTER_VALUE)
+        actual.ShouldBe(COUNTER_VALUE)
+    End Sub
 End Class
