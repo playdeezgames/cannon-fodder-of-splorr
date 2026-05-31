@@ -63,4 +63,12 @@ Public Class TestEntity_counter_should
         Dim actual = sut.ChangeCounter(Keys.ONE, COUNTER_VALUE)
         actual.ShouldBe(COUNTER_VALUE)
     End Sub
+    <Fact>
+    Sub default_counter_sets_value_for_invalid_key()
+        Dim entityData As New EntityData
+        Dim sut = TestEntity.Create(entityData)
+        sut.DefaultCounter(Keys.ONE, COUNTER_VALUE)
+        Dim actual = sut.GetCounter(Keys.ONE)
+        actual.ShouldBe(COUNTER_VALUE)
+    End Sub
 End Class

@@ -9,7 +9,6 @@ Friend Class MainMenuDialog
     End Sub
 
     Public Overrides Function Run() As IDialog
-        Context.Clear()
         Context.WriteLine($"Games Played: {Model.GamesPlayed}")
         Dim averageScore = Model.AverageScore
         If averageScore.HasValue Then

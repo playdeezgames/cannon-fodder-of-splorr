@@ -9,7 +9,7 @@ Friend Class EndGameDialog
     End Sub
 
     Public Overrides Function Run() As IDialog
-        Context.WriteString($"It took you {Model.GuessCount} guesses!")
+        Context.WriteLine($"It took you {Model.GuessCount} guesses!")
         Model.FinishGame()
         Return ExitDialog.Invoke
     End Function

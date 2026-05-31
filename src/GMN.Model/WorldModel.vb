@@ -68,13 +68,17 @@ Public Class WorldModel
     End Sub
 
     Public Sub MakeGuess(guess As Integer) Implements IWorldModel.MakeGuess
+        Entity.ChangeCounter(Counters.GUESS_COUNT, 1)
         Entity.SetTag(Tags.TOO_HIGH, guess > Entity.GetCounter(Counters.TARGET_NUMBER))
         Entity.SetTag(Tags.TOO_LOW, guess < Entity.GetCounter(Counters.TARGET_NUMBER))
     End Sub
 
     Public Sub FinishGame() Implements IWorldModel.FinishGame
+        Entity.DefaultCounter(Counters.GAMES_PLAYED, 0)
+        Entity.DefaultCounter(Counters.TOTAL_SCORE, 0)
         Entity.ChangeCounter(Counters.GAMES_PLAYED, 1)
         Entity.ChangeCounter(Counters.TOTAL_SCORE, GuessCount)
+        Entity.Save(Grimoire.SAVE_FILE_NAME)
     End Sub
 
     Public Shared Function Create() As IWorldModel

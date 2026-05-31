@@ -12,4 +12,5 @@
     Sub SetCounterMinimum(counterId As String, counterMinimum As Integer)
     Function TryGetCounter(counterId As String) As Integer?
     Function ChangeCounter(counterId As String, delta As Integer) As Integer
+    Sub DefaultCounter(counterId As String, defaultValue As Integer)
 End Interface
