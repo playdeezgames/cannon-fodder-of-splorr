@@ -11,7 +11,14 @@ Friend Class MainMenuDialog
     Public Overrides Function Run() As IDialog
         Return Context.Choose(
             "Main Menu:",
-            ExitChoice)
+            DialogChoice.CreateEnabled(
+                "Quit",
+                ConfirmDialog(Of IHostContext).
+                    Launch(
+                        Context,
+                        "[red]Are you sure you want to quit?[/]",
+                        ExitDialog,
+                        AddressOf Relaunch)))
     End Function
 
     Protected Overrides Function Relaunch() As IDialog

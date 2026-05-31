@@ -1,31 +1,21 @@
 <Solution>
   <Folder Name="/Business/">
-    <Project Path="GMN.Business/GMN.Business.vbproj" Id="50d39715-021f-444f-985e-2b2a0ce2e4f7">
-      <Build Solution="Debug|*" Project="false" />
-    </Project>
-    <Project Path="TGGD.Business.Tests/TGGD.Business.Tests.vbproj" Id="ddbf9509-71d9-4bbf-95ee-fcd5cf5b5e97" />
+    <Project Path="GMN.Business/GMN.Business.vbproj" />
+    <Project Path="TGGD.Business.Tests/TGGD.Business.Tests.vbproj" />
     <Project Path="TGGD.Business/TGGD.Business.vbproj" />
   </Folder>
   <Folder Name="/Data/">
-    <Project Path="GMN.Data/GMN.Data.vbproj" Id="ff91a35c-4464-4561-9b86-402e05055601">
-      <Build Solution="Debug|*" Project="false" />
-    </Project>
+    <Project Path="GMN.Data/GMN.Data.vbproj" />
     <Project Path="TGGD.Data/TGGD.Data.vbproj" />
   </Folder>
   <Folder Name="/Model/">
-    <Project Path="GMN.Model/GMN.Model.vbproj" Id="fead04a3-178c-49e2-acd2-8fc0f44caea8">
-      <Build Solution="Debug|*" Project="false" />
-    </Project>
+    <Project Path="GMN.Model/GMN.Model.vbproj" />
     <Project Path="TGGD.Model/TGGD.Model.vbproj" />
   </Folder>
   <Folder Name="/Solution Items/" />
   <Folder Name="/UI/">
-    <Project Path="GMN.UI/GMN.UI.vbproj" Id="20383a3b-c697-4f64-a8c0-f554779ed0e3">
-      <Build Solution="Debug|*" Project="false" />
-    </Project>
+    <Project Path="GMN.UI/GMN.UI.vbproj" />
     <Project Path="TGGD.UI/TGGD.UI.vbproj" />
   </Folder>
-  <Project Path="GuessMyNumber/GuessMyNumber.vbproj" Id="13b94832-41e4-4058-9cea-22a4c02aed19">
-    <Build Solution="Debug|*" Project="false" />
-  </Project>
+  <Project Path="GuessMyNumber/GuessMyNumber.vbproj" />
 </Solution>
