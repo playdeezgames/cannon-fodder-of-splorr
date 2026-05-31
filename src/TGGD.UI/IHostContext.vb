@@ -7,4 +7,5 @@
     Function ReadString(text As String, Optional defaultValue As String = Nothing) As String
     Function ReadKey() As String
     Sub WriteFiglet(text As String, Optional color As String = Nothing)
+    Function ReadInteger(text As String, Optional defaultValue As Integer? = Nothing) As Integer
 End Interface

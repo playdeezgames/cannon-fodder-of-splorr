@@ -11,8 +11,18 @@ Friend Class MainMenuDialog
     Public Overrides Function Run() As IDialog
         Context.Clear()
         Context.WriteLine($"Games Played: {Model.GamesPlayed}")
+        Dim averageScore = Model.AverageScore
+        If averageScore.HasValue Then
+            Context.WriteLine($"Average Score: {averageScore.Value}")
+        End If
         Return Context.Choose(
             "Main Menu:",
+            DialogChoice.CreateEnabled(
+                "New Game!",
+                NewGameDialog.Launch(
+                    Context,
+                    Model,
+                    AddressOf Relaunch)),
             DialogChoice.CreateEnabled(
                 "Quit",
                 ConfirmDialog(Of IHostContext).

@@ -63,4 +63,16 @@ Public MustInherit Class Entity(Of TEntityData As EntityData)
         End If
         Return Integer.MinValue
     End Function
+
+    Public Function TryGetCounter(counterId As String) As Integer? Implements IEntity.TryGetCounter
+        Dim result As Integer
+        If EntityData.Counters.TryGetValue(counterId, result) Then
+            Return result
+        End If
+        Return Nothing
+    End Function
+
+    Public Function ChangeCounter(counterId As String, delta As Integer) As Integer Implements IEntity.ChangeCounter
+        Throw New NotImplementedException()
+    End Function
 End Class

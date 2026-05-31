@@ -10,4 +10,6 @@
     Sub SetCounterMaximum(counterId As String, counterMaximum As Integer)
     Function GetCounterMinimum(counterId As String) As Integer
     Sub SetCounterMinimum(counterId As String, counterMinimum As Integer)
+    Function TryGetCounter(counterId As String) As Integer?
+    Function ChangeCounter(counterId As String, delta As Integer) As Integer
 End Interface

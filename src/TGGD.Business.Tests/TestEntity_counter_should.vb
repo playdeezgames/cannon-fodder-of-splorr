@@ -34,4 +34,19 @@ Public Class TestEntity_counter_should
         Dim actual = sut.GetCounter(Keys.ONE)
         actual.ShouldBe(COUNTER_VALUE)
     End Sub
+    <Fact>
+    Sub try_get_counter_returns_nothing_when_not_set()
+        Dim entityData As New EntityData
+        Dim sut = TestEntity.Create(entityData)
+        Dim actual = sut.TryGetCounter(Keys.ONE)
+        actual.ShouldBeNull
+    End Sub
+    <Fact>
+    Sub try_get_counter_returns_value_when_set()
+        Dim entityData As New EntityData
+        Dim sut = TestEntity.Create(entityData)
+        sut.SetCounter(Keys.ONE, COUNTER_VALUE)
+        Dim actual = sut.TryGetCounter(Keys.ONE)
+        actual.ShouldBe(COUNTER_VALUE)
+    End Sub
 End Class

@@ -53,4 +53,12 @@ Friend Class GMNHostContext
     Public Function ReadKey() As String Implements IHostContext.ReadKey
         Return Console.ReadKey(True).Key.ToString
     End Function
+
+    Public Function ReadInteger(text As String, Optional defaultValue As Integer? = Nothing) As Integer Implements IHostContext.ReadInteger
+        If defaultValue.HasValue Then
+            Return AnsiConsole.Ask(Of Integer)(text, defaultValue.Value)
+        Else
+            Return AnsiConsole.Ask(Of Integer)(text)
+        End If
+    End Function
 End Class
